@@ -10,4 +10,9 @@ class Property extends Model
     {
         return $this->belongsTo('App\user');
     }
+
+    public function visits()
+    {
+        return $this->hasMany('App\Visit');
+    }
 }
