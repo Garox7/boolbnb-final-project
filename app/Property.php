@@ -15,4 +15,9 @@ class Property extends Model
     {
         return $this->hasMany('App\Visit');
     }
+
+    public function services()
+    {
+        return $this->belongsToMany('App\Service');
+    }
 }
