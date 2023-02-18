@@ -30,4 +30,9 @@ class Property extends Model
     {
         return $this->belongsToMany('App\Sponsorship');
     }
+
+    public function messages()
+    {
+        return $this->hasMany('App\Message');
+    }
 }
