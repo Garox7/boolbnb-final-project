@@ -25,4 +25,9 @@ class Property extends Model
     {
         return $this->hasMany('App\PropertyImages');
     }
+
+    public function sponsorships()
+    {
+        return $this->belongsToMany('App\Sponsorship');
+    }
 }

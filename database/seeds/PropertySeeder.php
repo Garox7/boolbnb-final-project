@@ -3,6 +3,7 @@
 use App\User;
 use App\Service;
 use App\Property;
+use App\Sponsorship;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 
@@ -19,6 +20,7 @@ class PropertySeeder extends Seeder
         $userId = User::all('id')->all();
         $serviceId = Service::all()->pluck('id');
         $serviceCount = count($serviceId);
+        $sponsorshipId = Sponsorship::all()->pluck('id');
 
         for ($i = 0; $i < 20; $i++) {
             $property = Property::create([
@@ -35,6 +37,8 @@ class PropertySeeder extends Seeder
             ]);
 
             $property->services()->attach($faker->randomElements($serviceId, rand(0, ($serviceCount > 5) ? 5 : $serviceCount)));
+
+            $property->sponsorships()->attach($faker->randomElement($sponsorshipId));
         }
     }
 }
