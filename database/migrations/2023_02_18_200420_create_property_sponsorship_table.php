@@ -14,10 +14,9 @@ class CreatePropertySponsorshipTable extends Migration
     public function up()
     {
         Schema::create('property_sponsorship', function (Blueprint $table) {
-            $table->foreignId('sponsorship_id');
             $table->foreignId('property_id');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->foreignId('sponsorship_id');
+            $table->date('start_date')->default(date("Y-m-d H:i:s"));
         });
     }
 
