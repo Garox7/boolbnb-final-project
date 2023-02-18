@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         Storage::makeDirectory('uploads');
         $this->call(UserSeeder::class);
         $this->call(ServiceSeeder::class);
+        $this->call(SponsorshipSeeder::class);
         $this->call(PropertySeeder::class);
         $this->call(VisitSeeder::class);
         $this->call(PropertyImagesSeeder::class);
