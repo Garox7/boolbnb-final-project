@@ -92,6 +92,7 @@ class PropertyController extends Controller
      */
     public function show(Property $property)
     {
+        $properties = Property::with('property_images')->get();
         return view('admin.properties.show', compact('property'));
     }
 
