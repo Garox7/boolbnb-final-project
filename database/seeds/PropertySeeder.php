@@ -25,7 +25,7 @@ class PropertySeeder extends Seeder
         for ($i = 0; $i < 20; $i++) {
             $property = Property::create([
                 'name' => $faker->words(rand(2, 5), true),
-                'description' => $faker->paragraphs(rand(2, 4), true),
+                'description' => $faker->paragraphs(2, true),
                 'user_id' => $faker->randomElement($userId)->id,
                 'address' => $faker->address(),
                 'latitude' => $faker->latitude(),
