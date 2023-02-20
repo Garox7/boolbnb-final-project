@@ -20,12 +20,22 @@ class PropertyImagesSeeder extends Seeder
         $imagesCount = 85;
 
         for ($i = 0; $i < $imagesCount; $i++) {
+
             $n = rand(1, $imagesCount);
-            if($n)
-            {
-                $content = new File(__DIR__ . '/../../storage/app/random_img/picsum' . $n . '.jpg');
-                $img_path = Storage::put('uploads', $content);
-            }
+            $content = new File(__DIR__ . '/../../storage/app/random_img/picsum' . $n . '.jpg');
+            $img_path = Storage::put('uploads', $content);
+
+            PropertyImages::create([
+                'property_id' => $faker->randomElement($propertyId)->id,
+                'image' => $img_path,
+            ]);
+        }
+
+        for ($i = 0; $i < ($imagesCount - count($propertyId)); $i++) {
+            $n = rand(1, $imagesCount);
+            $content = new File(__DIR__ . '/../../storage/app/random_img/picsum' . $n . '.jpg');
+            $img_path = Storage::put('uploads', $content);
+
             PropertyImages::create([
                 'property_id' => $faker->randomElement($propertyId)->id,
                 'image' => $img_path,
