@@ -18,8 +18,10 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        $properties = Property::with('property_images')->get();
-
+        $user = auth()->user();
+        $properties = Property::where('user_id', $user->id)
+            ->with('property_images')
+            ->get();
         return view('admin.properties.index', [
             'properties' => $properties,
         ]);
