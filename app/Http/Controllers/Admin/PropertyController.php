@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\User;
 use App\Property;
 use App\PropertyImages;
 use Illuminate\Http\Request;
@@ -30,7 +31,7 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.properties.create');
     }
 
     /**
@@ -41,7 +42,34 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validazione
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'string',
+            'address' => 'required|string|max:255',
+            'bedroom_count' => 'required|integer|max:20',
+            'bed_count' => 'required|integer|max:20',
+            'bathroom_count' => 'required|integer|max:20',
+        ]);
+
+        $data = $request->all();
+        $userId = User::with('properties')->get('id')->all();
+
+        // salvataggio dati
+        $property = new Property();
+        $property->name = $data['name'];
+        $property->description = $data['description'];
+        $property->user_id = $userId['id'];
+        $property->address = $data['address'];
+        $property->bedroom_count = $data['bedroom_count'];
+        $property->bed_count = $data['bed_count'];
+        $property->bathroom_count = $data['bathroom_count'];
+        $property->save();
+
+        //redirezionamento
+        return redirect()
+            ->route('admin.properties.show', ['property' => $property])
+            ->with('success_created', $property);
     }
 
     /**
