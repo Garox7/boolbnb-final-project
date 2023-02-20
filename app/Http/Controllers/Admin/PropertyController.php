@@ -53,20 +53,19 @@ class PropertyController extends Controller
         ]);
 
         $data = $request->all();
-        $userId = User::with('properties')->get('id')->all();
 
         // salvataggio dati
         $property = new Property();
         $property->name = $data['name'];
         $property->description = $data['description'];
-        $property->user_id = $userId['id'];
+        $property->user_id = auth()->id();
         $property->address = $data['address'];
         $property->bedroom_count = $data['bedroom_count'];
         $property->bed_count = $data['bed_count'];
         $property->bathroom_count = $data['bathroom_count'];
         $property->save();
 
-        //redirezionamento
+        // redirezionamento
         return redirect()
             ->route('admin.properties.show', ['property' => $property])
             ->with('success_created', $property);
