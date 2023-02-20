@@ -19,7 +19,7 @@ class PropertyImagesSeeder extends Seeder
         $propertyId = Property::all('id')->all();
         $imagesCount = 85;
 
-        for ($i=0; $i < $imagesCount; $i++) {
+        for ($i = 0; $i < $imagesCount; $i++) {
             $n = rand(1, $imagesCount);
             if($n)
             {
