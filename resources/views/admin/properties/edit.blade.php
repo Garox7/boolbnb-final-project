@@ -9,7 +9,7 @@
         {{-- NAME --}}
         <div class="mb-3">
             <label for="name" class="form-label">Titolo</label>
-            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
+            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name', $property->name) }}">
             <div class="invalid-feedback">
                 @error('name')
                     <ul>
@@ -24,7 +24,7 @@
         {{-- ADDRESS --}}
         <div class="mb-3">
             <label for="address" class="form-label">address</label>
-            <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address') }}">
+            <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address', $property->address) }}">
             <div class="invalid-feedback">
                 @error('address')
                     <ul>
@@ -39,10 +39,11 @@
         {{-- BEDROOM --}}
         <div class="mb-3">
             <label for="bedroom_count" class="form-label">Numero camere da letto</label>
-            <select class="form-select" aria-label="Default select example" id="bedroom_count" name="bedroom_count">
+            <select class="form-select @error('bedroom_count') is-invalid @enderror" aria-label="Default select example" id="bedroom_count" name="bedroom_count">
                 <option value="">Seleziona il numero di camere da letto</option>
                 @for($i = 1; $i <= 20; $i++)
-                    <option value="{{ $i }}">{{ $i }}</option>
+                <option value="{{ $i }}" @if(old('bedroom_count', $property->bedroom_count) == $i) selected @endif>{{ $i }}</option>
+
                 @endfor
             </select>
             <div class="invalid-feedback">
@@ -62,7 +63,7 @@
             <select class="form-select" aria-label="Default select example" id="bed_count" name="bed_count">
                 <option value="">Seleziona il numero di posti letto</option>
                 @for($i = 1; $i <= 20; $i++)
-                    <option value="{{ $i }}">{{ $i }}</option>
+                <option value="{{ $i }}" @if(old('bed_count', $property->bed_count) == $i) selected @endif>{{ $i }}</option>
                 @endfor
             </select>
             <div class="invalid-feedback">
@@ -82,7 +83,7 @@
             <select class="form-select" aria-label="Default select example" id="bathroom_count" name="bathroom_count">
                 <option value="">Seleziona il numero di bagni</option>
                 @for($i = 1; $i <= 20; $i++)
-                    <option value="{{ $i }}">{{ $i }}</option>
+                    <option value="{{ $i }}" @if(old('bathroom_count', $property->bathroom_count) == $i) selected @endif>{{ $i }}</option>
                 @endfor
             </select>
             <div class="invalid-feedback">
@@ -95,6 +96,7 @@
                 @enderror
             </div>
         </div>
+
 
         {{-- FILE IMAGE --}}
         {{-- <div class="mb-3">
@@ -114,7 +116,7 @@
         {{-- DESCRIPTION --}}
         <div class="mb-3">
             <label for="description" class="form-label">Descrizione</label>
-            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ old('description') }}</textarea>
+            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ old('description', $property->description) }}</textarea>
             <div class="invalid-feedback">
                 @error('description')
                     <ul>
@@ -127,7 +129,7 @@
         </div>
 
         <div class="mb-3">
-            <button class="btn btn-primary" type="submit">Crea proprietà</button>
+            <button class="btn btn-warning" type="submit">Modifica proprietà</button>
         </div>
     </form>
 </div>
