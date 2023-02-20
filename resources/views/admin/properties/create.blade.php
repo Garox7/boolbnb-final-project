@@ -96,19 +96,13 @@
         </div>
 
         {{-- FILE IMAGE --}}
-        {{-- <div class="mb-3">
-            <label for="uploaded_img" class="form-label">Importa file</label>
-            <input type="file" class="form-control @error('uploaded_img') is-invalid @enderror" id="uploaded_img" name="uploaded_img" aria-label="file example" required>
-            <div class="invalid-feedback">
-                @error('uploaded_img')
-                    <ul>
-                        @foreach ($errors->get('uploaded_img') as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                @enderror
+        <div id="image-fields">
+            <div class="mb-3">
+              <label for="image" class="form-label">Immagine 1</label>
+              <input type="file" class="form-control" id="image" name="image[]" required>
             </div>
-        </div> --}}
+        </div>
+        <button type="button" id="add-image" class="btn btn-secondary">Aggiungi immagine</button>
 
         {{-- DESCRIPTION --}}
         <div class="mb-3">

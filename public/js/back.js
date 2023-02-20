@@ -10535,6 +10535,16 @@ var __webpack_exports__ = {};
   !*** ./resources/js/back.js ***!
   \******************************/
 __webpack_require__(/*! ./common */ "./resources/js/common.js");
+var addButton = document.querySelector("#add-image");
+var imageFields = document.querySelector("#image-fields");
+if (addButton && imageFields) {
+  var count = 1;
+  addButton.addEventListener("click", function () {
+    var newField = document.createElement("div");
+    newField.innerHTML = "\n        <div class=\"mb-3\">\n        <label for=\"image\" class=\"form-label\">Immagine ".concat(++count, "</label>\n        <input type=\"file\" class=\"form-control\" id=\"image\" name=\"image[]\">\n        </div>\n    ");
+    imageFields.appendChild(newField);
+  });
+}
 })();
 
 /******/ })()

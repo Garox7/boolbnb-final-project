@@ -7,6 +7,7 @@ use App\Property;
 use App\PropertyImages;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class PropertyController extends Controller
 {
@@ -42,7 +43,7 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-        // validazione
+        // Validazione
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'string',
@@ -50,11 +51,12 @@ class PropertyController extends Controller
             'bedroom_count' => 'required|integer|max:20',
             'bed_count' => 'required|integer|max:20',
             'bathroom_count' => 'required|integer|max:20',
+            'images.*' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $data = $request->all();
 
-        // salvataggio dati
+        // Salvataggio dati
         $property = new Property();
         $property->name = $data['name'];
         $property->description = $data['description'];
@@ -65,7 +67,18 @@ class PropertyController extends Controller
         $property->bathroom_count = $data['bathroom_count'];
         $property->save();
 
-        // redirezionamento
+        // Controllo e salvataggio immagini
+        if ($request->hasFile('image')) {
+            foreach ($request->file('image') as $image) {
+                $path = $image->store('uploads');
+                $propertyImage = new PropertyImages();
+                $propertyImage->property_id = $property->id;
+                $propertyImage->image = $path;
+                $propertyImage->save();
+            }
+        }
+
+        // Redirezionamento
         return redirect()
             ->route('admin.properties.show', ['property' => $property])
             ->with('success_created', $property);
