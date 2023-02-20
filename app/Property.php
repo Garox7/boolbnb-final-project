@@ -21,7 +21,7 @@ class Property extends Model
         return $this->belongsToMany('App\Service');
     }
 
-    public function images()
+    public function property_images()
     {
         return $this->hasMany('App\PropertyImages');
     }

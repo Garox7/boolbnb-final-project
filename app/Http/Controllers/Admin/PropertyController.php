@@ -16,9 +16,11 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        $properties=Property::all();
-        $propertyImages=PropertyImages::all();
-        return view('admin.properties.index',['properties'=>$properties,'propertyImages'=>$propertyImages]);
+        $properties = Property::with('property_images')->get();
+
+        return view('admin.properties.index', [
+            'properties' => $properties,
+        ]);
     }
 
     /**
@@ -50,7 +52,7 @@ class PropertyController extends Controller
      */
     public function show(Property $property)
     {
-        return view('admin.properties.show',compact('property'));
+        return view('admin.properties.show', compact('property'));
     }
 
     /**
