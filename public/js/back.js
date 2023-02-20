@@ -10535,6 +10535,8 @@ var __webpack_exports__ = {};
   !*** ./resources/js/back.js ***!
   \******************************/
 __webpack_require__(/*! ./common */ "./resources/js/common.js");
+
+// MY JavaScript
 var addButton = document.querySelector("#add-image");
 var imageFields = document.querySelector("#image-fields");
 if (addButton && imageFields) {

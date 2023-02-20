@@ -1,6 +1,6 @@
 require('./common');
 
-
+// MY JavaScript
 const addButton = document.querySelector("#add-image");
 const imageFields = document.querySelector("#image-fields");
 
