@@ -42,8 +42,7 @@
             <select class="form-select @error('bedroom_count') is-invalid @enderror" aria-label="Default select example" id="bedroom_count" name="bedroom_count">
                 <option value="">Seleziona il numero di camere da letto</option>
                 @for($i = 1; $i <= 20; $i++)
-                <option value="{{ $i }}" @if(old('bedroom_count', $property->bedroom_count) == $i) selected @endif>{{ $i }}</option>
-
+                    <option value="{{ $i }}" @if(old('bedroom_count', $property->bedroom_count) == $i) selected @endif>{{ $i }}</option>
                 @endfor
             </select>
             <div class="invalid-feedback">
