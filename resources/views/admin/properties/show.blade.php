@@ -3,11 +3,18 @@
 @section('content')
     @if(session('success_created'))
         <div class="container py-4">
-            <div class="alert alert-warning">
-                La tua proprietà "{{ session('success_created')->name }}" è stato creata con successo!
+            <div class="alert alert-success">
+                La tua proprietà "{{ session('success_created')->name }}" è stata creata con successo.
+            </div>
+        </div>
+    @elseif (session('success_updated'))
+        <div class="container py-4">
+            <div class="alert alert-success">
+                La tua proprietà "{{ session('success_updated')->name }}" è stata modificata.
             </div>
         </div>
     @endif
+
     <div class="container">
         <h1 class="mb-4">{{$property->name}}</h1>
 

@@ -38,7 +38,7 @@
         {{-- BEDROOM --}}
         <div class="mb-3">
             <label for="bedroom_count" class="form-label">Numero camere da letto</label>
-            <select class="form-select" aria-label="Default select example" id="bedroom_count" name="bedroom_count">
+            <select class="form-select @error('bedroom_count') is-invalid @enderror" aria-label="Default select example" id="bedroom_count" name="bedroom_count">
                 <option value="">Seleziona il numero di camere da letto</option>
                 @for($i = 1; $i <= 20; $i++)
                     <option value="{{ $i }}">{{ $i }}</option>
@@ -58,7 +58,7 @@
         {{-- BED --}}
         <div class="mb-3">
             <label for="bed_count" class="form-label">Numero di letti</label>
-            <select class="form-select" aria-label="Default select example" id="bed_count" name="bed_count">
+            <select class="form-select @error('bed_count') is-invalid @enderror" aria-label="Default select example" id="bed_count" name="bed_count">
                 <option value="">Seleziona il numero di posti letto</option>
                 @for($i = 1; $i <= 20; $i++)
                     <option value="{{ $i }}">{{ $i }}</option>
@@ -78,7 +78,7 @@
         {{-- BATHROOM  --}}
         <div class="mb-3">
             <label for="bathroom_count" class="form-label">Numero di bagni</label>
-            <select class="form-select" aria-label="Default select example" id="bathroom_count" name="bathroom_count">
+            <select class="form-select @error('bathroom_count') is-invalid @enderror" aria-label="Default select example" id="bathroom_count" name="bathroom_count">
                 <option value="">Seleziona il numero di bagni</option>
                 @for($i = 1; $i <= 20; $i++)
                     <option value="{{ $i }}">{{ $i }}</option>
@@ -102,7 +102,7 @@
               <input type="file" class="form-control" id="image" name="image[]" required>
             </div>
         </div>
-        <button type="button" id="add-image" class="btn btn-secondary">Aggiungi immagine</button>
+        <button type="button" id="add-image" class="btn btn-secondary mb-3">Aggiungi immagine</button>
 
         {{-- DESCRIPTION --}}
         <div class="mb-3">
@@ -120,7 +120,7 @@
         </div>
 
         <div class="mb-3">
-            <button class="btn btn-primary" type="submit">Crea proprietà</button>
+            <button class="btn btn-primary text-light" type="submit">Crea proprietà</button>
         </div>
     </form>
 </div>

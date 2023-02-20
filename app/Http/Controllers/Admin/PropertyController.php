@@ -7,7 +7,6 @@ use App\Property;
 use App\PropertyImages;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
 
 class PropertyController extends Controller
 {
@@ -50,10 +49,10 @@ class PropertyController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'string',
             'address' => 'required|string|max:255',
-            'bedroom_count' => 'required|integer|max:20',
-            'bed_count' => 'required|integer|max:20',
-            'bathroom_count' => 'required|integer|max:20',
-            'images.*' => 'image|mimes:jpeg,png,jpg|max:2048',
+            'bedroom_count' => 'required|integer|min:1|max:20',
+            'bed_count' => 'required|integer|min:1|max:20',
+            'bathroom_count' => 'required|integer|min:1|max:20',
+            'image.*' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $data = $request->all();
@@ -142,7 +141,7 @@ class PropertyController extends Controller
         // redirezionamento
         return redirect()
             ->route('admin.properties.show', ['property' => $property])
-            ->with('success_created', $property);
+            ->with('success_updated', $property);
     }
 
     /**
