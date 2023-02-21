@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 
 @section('content')
 <div class="container">
@@ -96,21 +96,25 @@
             </div>
         </div>
 
-
         {{-- FILE IMAGE --}}
-        {{-- <div class="mb-3">
-            <label for="uploaded_img" class="form-label">Importa file</label>
-            <input type="file" class="form-control @error('uploaded_img') is-invalid @enderror" id="uploaded_img" name="uploaded_img" aria-label="file example" required>
-            <div class="invalid-feedback">
-                @error('uploaded_img')
-                    <ul>
-                        @foreach ($errors->get('uploaded_img') as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                @enderror
+        <div id="image-fields">
+            <div class="mb-3">
+                @foreach($property->property_images as $image)
+                    <label for="image" class="form-label">
+                        <img src="{{ asset('storage/' . $image->image) }}" alt="{{ $property->name }}" style="width: 150px; heigth: 150px">
+                    </label>
+                    <input type="file" class="form-control" id="image" name="image[]" value="{{ $image->image }}" style="display:none;" required>
+                @endforeach
             </div>
-        </div> --}}
+        </div>
+        @if ($errors->has('image') || $errors->has('image.*'))
+            <ul>
+                @foreach ($errors->get('image') as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
+        <button type="button" id="add-image" class="btn btn-secondary mb-3">Aggiungi immagine</button>
 
         {{-- DESCRIPTION --}}
         <div class="mb-3">
