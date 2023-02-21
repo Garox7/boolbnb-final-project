@@ -10819,3 +10819,108 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /********** colors ***********/
+  --body-color: #FFF;
+  --text-color: #222;
+  --button-color: #3535ec;
+  --border-color: #EBEBEB;
+  --text-light: #B0B0B0;
+  --text-semi-light: #717171;
+}
+
+body {
+  height: 100%;
+  background: var(--body-color);
+}
+
+#app {
+  position: relative;
+}
+
+nav.desktop-nav {
+  display: none;
+}
+
+nav.mobile-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  padding: 0 12px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+nav.mobile-nav .nav-container {
+  flex: 1 0 auto;
+  max-width: 560px;
+  height: -moz-min-content;
+  height: min-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+nav.mobile-nav .nav-container a {
+  flex: 1 1 auto;
+  color: var(--text-color);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--text-light);
+}
+nav.mobile-nav .nav-container a span {
+  color: var(--text-semi-light);
+  font-size: 10px;
+  margin-top: 2px;
+}
+
+@media screen and (min-width: 744px) {
+  nav.mobile-nav {
+    display: none;
+  }
+  nav.desktop-nav {
+    display: block;
+    height: 80px;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  nav.desktop-nav .nav-logo a {
+    color: var(--button-color);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+  nav.desktop-nav .nav-logo a .logo-text {
+    font-size: 22px;
+    font-weight: 900;
+    margin-left: 10px;
+  }
+  nav.desktop-nav .user-controls {
+    display: flex;
+    align-items: center;
+  }
+  nav.desktop-nav .user-controls .controls {
+    margin-left: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    padding: 5px 5px 5px 12px;
+    display: flex;
+    align-items: center;
+  }
+  nav.desktop-nav .user-controls .controls .user-icon {
+    margin-left: 10px;
+  }
+}
