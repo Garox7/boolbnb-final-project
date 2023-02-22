@@ -10,7 +10,14 @@ class PropertyController extends Controller
 {
     public function index()
     {
-        $properties = Property::with('property_images')->get();
+        $properties = Property::where('status', 1 )
+            ->with([
+                'property_images' => function ($query) {
+                    $query->select('id', 'property_id', 'image');
+                },
+            ])
+            ->select('id', 'address', 'bed_count', 'bathroom_count')
+            ->get();
         return response()->json([
             'success' => true,
             'results' => $properties,
