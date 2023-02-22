@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    /********** colors ***********/
+    --body-color: #FFF;
+    --text-color: #222;
+    --button-color: #3535ec; // boolean ispiration
+    // --button-color: #ff395c; // airbnb original
+    --border-color: #EBEBEB;
+    --text-light: #B0B0B0;
+    --text-semi-light: #717171;
+}
+
+html, body {
+    font-family: 'Nunito', sans-serif;
+}
+
+body {
+    height: 100%;
+    background: var(--body-color);
+}
