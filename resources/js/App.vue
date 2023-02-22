@@ -26,7 +26,7 @@ export default {
 @import './scss/reset';
 
 .main {
-    padding: 1rem;
+    padding: 1.5rem;
 }
 
 </style>

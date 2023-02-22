@@ -119,6 +119,7 @@ header.header-mobile{
             flex: 1 1 auto;
 
             input {
+                width: 100%;
                 border: none;
                 outline: none;
 
