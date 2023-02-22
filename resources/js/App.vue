@@ -2,7 +2,9 @@
     <div>
         <HeaderComponent />
 
-        <router-view />
+        <div class="main">
+            <router-view />
+        </div>
 
         <!-- footer -->
     </div>
@@ -21,26 +23,10 @@ export default {
 
 <style lang="scss">
 // TODO: creare un file di reset
-/* Scegliere il font */
+@import './scss/reset';
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+.main {
+    padding: 1rem;
 }
 
-:root {
-    /********** colors ***********/
-    --body-color: #FFF;
-    --text-color: #222;
-    // boolean ispiration
-    --button-color: #3535ec;
-    // airbnb original
-    // --button-color: #ff395c;
-}
-
-body {
-    height: 100%;
-    background: var(--body-color);
-}
 </style>
