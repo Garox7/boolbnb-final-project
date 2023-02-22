@@ -10850,6 +10850,7 @@ nav.desktop-nav {
 
 nav.mobile-nav {
   position: fixed;
+  background-color: var(--body-color);
   bottom: 0;
   left: 0;
   width: 100%;
@@ -10859,6 +10860,7 @@ nav.mobile-nav {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 10;
 }
 nav.mobile-nav .nav-container {
   flex: 1 0 auto;
