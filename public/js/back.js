@@ -70,15 +70,6 @@ __webpack_require__(/*! ./common */ "./resources/js/common.js");
 
 // MY JavaScript
 
-//app.blade.php
-var controlBtn = document.querySelector('.controls');
-var dropMenu = controlBtn.querySelector('.drop-menu');
-if (controlBtn && dropMenu) {
-  controlBtn.addEventListener('click', function () {
-    dropMenu.classList.toggle('hidden');
-  });
-}
-
 // create.blade.php
 var addButton = document.querySelector("#add-image");
 var imageFields = document.querySelector("#image-fields");
