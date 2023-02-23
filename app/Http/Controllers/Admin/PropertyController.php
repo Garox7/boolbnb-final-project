@@ -152,6 +152,8 @@ class PropertyController extends Controller
     public function destroy(Property $property)
     {
         $property->property_images()->delete();
+        $property->visits()->delete();
+        $property->services()->detach();
         $property->delete();
         return redirect()->route('admin.properties.index')->with('success_delete', $property);
     }
