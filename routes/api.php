@@ -14,8 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
 Route::get('/properties', 'Api\PropertyController@index')->name('property.index');
+Route::get('/auth/status', 'Api\AuthController@getAuthStatus');
+
