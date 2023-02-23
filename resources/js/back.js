@@ -2,6 +2,16 @@ require('./common');
 
 // MY JavaScript
 
+//app.blade.php
+const controlBtn = document.querySelector('.controls');
+const dropMenu = controlBtn.querySelector('.drop-menu')
+
+if (controlBtn && dropMenu) {
+    controlBtn.addEventListener('click', function() {
+        dropMenu.classList.toggle('hidden');
+    })
+}
+
 // create.blade.php
 const addButton = document.querySelector("#add-image");
 const imageFields = document.querySelector("#image-fields");

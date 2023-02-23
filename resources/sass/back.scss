@@ -8,7 +8,9 @@
 @import '~bootstrap/scss/bootstrap';
 
 // MY CSS
+@import './reset';
 @import 'partials/layouts_app';
 @import 'partials/index';
+@import 'partials/dashboard';
 
 
