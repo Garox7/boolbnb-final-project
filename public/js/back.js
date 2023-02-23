@@ -10554,7 +10554,11 @@ if (addButton && imageFields) {
 var deleteBtn = document.querySelectorAll('.delete-button');
 var deletePopup = document.querySelector('.delete-popup-backdrop');
 var cancelBtn = document.querySelector('.cancel-button');
+var deleteSuccess = document.querySelector('.alert-danger');
 if (deleteBtn && deletePopup && cancelBtn) {
+  var hideSuccessMessage = function hideSuccessMessage() {
+    deleteSuccess.classList.add('d-none');
+  };
   deleteBtn.forEach(function (element) {
     element.addEventListener('click', function () {
       console.log('cliccato');
@@ -10566,11 +10570,12 @@ if (deleteBtn && deletePopup && cancelBtn) {
     deletePopup.classList.add('hidden');
     document.body.style.overflow = 'visible';
   });
+  ;
+  if (document.body.contains(deleteSuccess)) {
+    setTimeout(hideSuccessMessage, 10000);
+  }
+  ;
 }
-
-// function hideSuccessMessage() {
-//     createSucces.classList.add('no-visible');
-// };
 })();
 
 /******/ })()

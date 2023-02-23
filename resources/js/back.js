@@ -25,6 +25,7 @@ if (addButton && imageFields) {
 const deleteBtn = document.querySelectorAll('.delete-button');
 const deletePopup = document.querySelector('.delete-popup-backdrop');
 const cancelBtn = document.querySelector('.cancel-button');
+const deleteSuccess = document.querySelector('.alert-danger');
 
 if (deleteBtn && deletePopup && cancelBtn) {
     deleteBtn.forEach(element => {
@@ -40,11 +41,16 @@ if (deleteBtn && deletePopup && cancelBtn) {
         deletePopup.classList.add('hidden');
         document.body.style.overflow = 'visible';
     });
+
+    function hideSuccessMessage() {
+        deleteSuccess.classList.add('d-none');
+    };
+
+    if(document.body.contains(deleteSuccess)) {
+        setTimeout(hideSuccessMessage, 10000);
+    };
 }
 
-    // function hideSuccessMessage() {
-    //     createSucces.classList.add('no-visible');
-    // };
 
 
 
