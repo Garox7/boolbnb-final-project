@@ -1,5 +1,12 @@
 @extends('admin.layouts.app')
 @section('content')
+@if(session('success_delete'))
+        <div class="container py-4">
+            <div class="alert alert-danger">
+                La tua proprietà "{{ session('success_delete')->name }}" è stata eliminata.
+            </div>
+        </div>
+    @endif
 <div class="container">
     <div class="row g-3">
         @foreach ($properties as $property)
