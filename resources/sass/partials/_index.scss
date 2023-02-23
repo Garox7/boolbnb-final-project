@@ -1,0 +1,83 @@
+.container {
+    position: relative;
+}
+
+.delete-popup-backdrop {
+    background-color: rgb(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100vw;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+
+    .popup-container {
+        background-color: white;
+        max-width: 450px;
+        height: auto;
+        padding: 2rem;
+        border-radius: 30px;
+        text-align: center;
+
+        h2 {
+            margin-bottom: .3rem;
+        }
+
+        p {
+            color: red;
+            margin-bottom: 1rem;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+
+            .cancel-button, .confirm-button {
+                background: none;
+                width: 100%;
+                border: none;
+                outline: none;
+                padding: 8px;
+                border-radius: 30px;
+            }
+
+            .cancel-button {
+                background-color: orangered;
+                color: white;
+                border-color: orangered;
+                border: 2px solid orangered;
+                transition: all .2s ease;
+
+                &:hover {
+                    background-color: transparent;
+                    color: orangered;
+                }
+            }
+
+            form {
+                width: 100%;
+
+                .confirm-button {
+                    border: none;
+                    width: 100%;
+                    transition: all .2s ease;
+
+                    &:hover {
+                        background-color: transparent;
+                        text-decoration: underline;
+                        color: inherit;
+                    }
+                }
+            }
+        }
+    }
+
+    &.hidden {
+        display: none;
+    }
+}

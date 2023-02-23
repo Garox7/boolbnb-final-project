@@ -18,11 +18,28 @@
                         <div class="col-6">
                             <a href="{{ route('admin.properties.edit', ['property' => $property])}}" class="btn btn-warning w-100">Modifica</a>
                         </div>
+                        <div class="col-12">
+                            <button class="btn btn-danger w-100 mt-2 delete-button">Elimina</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         @endforeach
+    </div>
+</div>
+<div class="delete-popup-backdrop hidden">
+    <div class="popup-container">
+        <h2>Sei sicuro di voler eliminare l'elemento?</h2>
+        <p>L'azione è irreversibile</p>
+        <div class="button-container">
+            <button class="cancel-button">Annulla</button>
+            <form action="{{ route('admin.properties.destroy', ['property' => $property->id]) }}" method="post">
+                @csrf
+                @method('DELETE')
+                <button class="confirm-button">Conferma</button>
+            </form>
+        </div>
     </div>
 </div>
 @endsection

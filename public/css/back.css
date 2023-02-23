@@ -10926,3 +10926,75 @@ nav.mobile-nav .nav-container a span {
     margin-left: 10px;
   }
 }
+.container {
+  position: relative;
+}
+
+.delete-popup-backdrop {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+.delete-popup-backdrop .popup-container {
+  background-color: white;
+  max-width: 450px;
+  height: auto;
+  padding: 2rem;
+  border-radius: 30px;
+  text-align: center;
+}
+.delete-popup-backdrop .popup-container h2, .delete-popup-backdrop .popup-container .h2 {
+  margin-bottom: 0.3rem;
+}
+.delete-popup-backdrop .popup-container p {
+  color: red;
+  margin-bottom: 1rem;
+}
+.delete-popup-backdrop .popup-container .button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.delete-popup-backdrop .popup-container .button-container .cancel-button, .delete-popup-backdrop .popup-container .button-container .confirm-button {
+  background: none;
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 8px;
+  border-radius: 30px;
+}
+.delete-popup-backdrop .popup-container .button-container .cancel-button {
+  background-color: orangered;
+  color: white;
+  border-color: orangered;
+  border: 2px solid orangered;
+  transition: all 0.2s ease;
+}
+.delete-popup-backdrop .popup-container .button-container .cancel-button:hover {
+  background-color: transparent;
+  color: orangered;
+}
+.delete-popup-backdrop .popup-container .button-container form {
+  width: 100%;
+}
+.delete-popup-backdrop .popup-container .button-container form .confirm-button {
+  border: none;
+  width: 100%;
+  transition: all 0.2s ease;
+}
+.delete-popup-backdrop .popup-container .button-container form .confirm-button:hover {
+  background-color: transparent;
+  text-decoration: underline;
+  color: inherit;
+}
+.delete-popup-backdrop.hidden {
+  display: none;
+}

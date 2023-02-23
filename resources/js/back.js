@@ -1,6 +1,8 @@
 require('./common');
 
 // MY JavaScript
+
+// create.blade.php
 const addButton = document.querySelector("#add-image");
 const imageFields = document.querySelector("#image-fields");
 
@@ -18,4 +20,31 @@ if (addButton && imageFields) {
     imageFields.appendChild(newField);
     });
 }
+
+// index.blade.php
+const deleteBtn = document.querySelectorAll('.delete-button');
+const deletePopup = document.querySelector('.delete-popup-backdrop');
+const cancelBtn = document.querySelector('.cancel-button');
+
+if (deleteBtn && deletePopup && cancelBtn) {
+    deleteBtn.forEach(element => {
+        element.addEventListener('click', function() {
+            console.log('cliccato');
+            deletePopup.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+
+        });
+    });
+
+    cancelBtn.addEventListener('click', function() {
+        deletePopup.classList.add('hidden');
+        document.body.style.overflow = 'visible';
+    });
+}
+
+    // function hideSuccessMessage() {
+    //     createSucces.classList.add('no-visible');
+    // };
+
+
 
