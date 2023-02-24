@@ -37,5 +37,8 @@
         </div>
 
         <p class="card-text">{{$property->description}}</p>
+        <p>Numero di letti: {{$property->bed_count}}</p>
+        <p>Numero di bagni: {{$property->bathroom_count}}</p>
+
     </div>
 @endsection

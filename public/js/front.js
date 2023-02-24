@@ -2320,7 +2320,7 @@ var render = function render() {
     });
   }), 0)], 2), _vm._v(" "), _c("div", {
     staticClass: "property-details"
-  }, [_c("span", [_vm._v(_vm._s(_vm.address))]), _vm._v(" "), _c("span", [_vm._v(_vm._s(_vm.bed))]), _vm._v(" "), _c("span", [_vm._v(_vm._s(_vm.bathroom))])])]);
+  }, [_c("span", [_vm._v(_vm._s(_vm.address))]), _vm._v(" "), _c("div", [_vm._v("Numero di letti: " + _vm._s(_vm.bed))]), _vm._v(" "), _c("div", [_vm._v("Numero di bagni: " + _vm._s(_vm.bathroom))])])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;

@@ -106,15 +106,17 @@
                     <input type="file" class="form-control" id="image" name="image[]" value="{{ $image->image }}" style="display:none;" required>
                 @endforeach
             </div>
-        </div>
-        @if ($errors->has('image') || $errors->has('image.*'))
+            @if ($errors->has('image') || $errors->has('image.*'))
             <ul>
                 @foreach ($errors->get('image') as $error)
                     <li>{{ $error }}</li>
                 @endforeach
             </ul>
         @endif
+        </div>
+
         <button type="button" id="add-image" class="btn btn-secondary mb-3">Aggiungi immagine</button>
+
 
         {{-- DESCRIPTION --}}
         <div class="mb-3">

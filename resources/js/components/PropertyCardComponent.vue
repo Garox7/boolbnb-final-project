@@ -35,8 +35,8 @@
 
         <div class="property-details">
             <span>{{ address }}</span>
-            <span>{{ bed }}</span>
-            <span>{{ bathroom }}</span>
+            <div>Numero di letti: {{ bed }}</div>
+            <div>Numero di bagni: {{ bathroom }}</div>
         </div>
     </div>
 </template>
