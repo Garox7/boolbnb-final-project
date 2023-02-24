@@ -14,18 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
+// Auth::routes();
 
-// Route::get('/home', 'HomeController@index')->name('home');
-
-Route::middleware('auth')
-->namespace('Admin')
-->name('admin.')
-->prefix('admin')
-->group(function () {
-    Route::get('/', 'AdminController@dashboard')->name('dashboard');
-    Route::resource('properties','PropertyController');
-});
+// Route::middleware('auth')
+// ->namespace('Admin')
+// ->name('admin.')
+// ->prefix('admin')
+// ->group(function () {
+//     Route::get('/', 'AdminController@dashboard')->name('dashboard');
+//     Route::resource('properties','PropertyController');
+// });
 
 Route::get('{any?}', function () {
     return view('guest.home');
