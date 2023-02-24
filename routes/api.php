@@ -20,4 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/properties', 'Api\PropertyController@index')->name('property.index');
 Route::get('/auth/status', 'Api\AuthController@getAuthStatus');
+Route::get('/properties/{property}', 'Api\PropertyController@show')->name('property.show');
 
