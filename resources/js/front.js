@@ -6,6 +6,7 @@ import App from './App';
 import VueRouter from 'vue-router';
 import PageHome from './pages/PageHome';
 import PageProperty from './pages/PageProperty';
+import CreatePropertyPage from './pages/CreatePropertyPage';
 
 Vue.use(VueRouter);
 
@@ -19,6 +20,13 @@ const routes = [
         path: '/properties',
         name: 'PageProperty',
         component: PageProperty,
+    },
+
+    // CRUD
+    {
+        path: '/properties/property/create',
+        name: 'CreatePropertyPage',
+        component: CreatePropertyPage,
     }
 ];
 
