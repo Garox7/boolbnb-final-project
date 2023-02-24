@@ -1,6 +1,5 @@
 <template>
     <div class="property-container">
-
         <PropertyCardComponent class="card-container"
             v-for="property in arrProperties"
             :key="property.id"
