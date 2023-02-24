@@ -1828,20 +1828,21 @@ __webpack_require__.r(__webpack_exports__);
       isLoggedIn: false,
       user: null
     };
-  },
-  mounted: function mounted() {
-    var _this = this;
-    axios.get('/api/auth/status').then(function (response) {
-      _this.isLoggedIn = response.data.authenticated;
-      console.log(response.data.authenticated);
-      console.log(_this.user);
-      if (_this.isLoggedIn) {
-        _this.user = response.data.user;
-      }
-    })["catch"](function (error) {
-      console.error(error);
-    });
-  }
+  } // TODO: rendere l'header dinamico in base all'autenticazione dell'utente
+  // mounted() {
+  //     axios.get('/api/auth/status')
+  //         .then(response => {
+  //             this.isLoggedIn = response.data.authenticated;
+  //             console.log(response.data.authenticated);
+  //             console.log(this.user)
+  //             if (this.isLoggedIn) {
+  //                 this.user = response.data.user;
+  //             }
+  //         })
+  //         .catch(error => {
+  //             console.error(error);
+  //         })
+  // }
 });
 
 /***/ }),
