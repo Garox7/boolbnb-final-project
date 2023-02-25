@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 // Rotte pubbliche
 Route::post('/register', 'Api\AuthController@register');
+Route::post('/login', 'Api\AuthController@login');
 Route::get('/properties', 'Api\PropertyController@index');
 Route::get('/properties/{property}', 'Api\PropertyController@show');
 
