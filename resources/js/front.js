@@ -4,15 +4,15 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 import Vue from 'vue';
 import App from './App';
 import VueRouter from 'vue-router';
-import PageHome from './pages/PageHome';
-import PageProperty from './pages/PageProperty';
-// Auth
-import PageLogin from './pages/Auth/PageLogin';
-import PageRegister from './pages/Auth/PageRegister';
+import HomePage from './pages/HomePage';
+import PropertyPage from './pages/PropertyPage';
+import LoginPage from './pages/Auth/LoginPage';
+import RegisterPage from './pages/Auth/RegisterPage';
 import DashboardPage from './pages/Admin/DashboardPage';
-import PropertyPageIndex from './pages/Admin/PropertyPageIndex';
-
-import CreatePropertyPage from './pages/CreatePropertyPage';
+import PropertiesIndex from './pages/Admin/PropertiesIndex';
+import PropertyShow from './pages/Admin/PropertyShow';
+import PropertyCreate from './pages/Admin/PropertyCreate';
+import PropertyUpdate from './pages/Admin/PropertyUpdate';
 
 Vue.use(VueRouter);
 
@@ -20,24 +20,24 @@ const routes = [
     {
         path: '/',
         name: 'home',
-        component: PageHome,
+        component: HomePage
     },
     {
-        path: '/property/:slug', // TODO: da rivedere il percorso aggiungendo lo slug
-        name: 'propertyShow',
-        component: PageProperty,
+        path: '/property/:slug',
+        name: 'propertyPage',
+        component: PropertyPage,
         props: true
     },
     // Auth
     {
         path: '/login',
-        name: 'pageLogin',
-        component: PageLogin,
+        name: 'loginPage',
+        component: LoginPage
     },
     {
         path: '/register',
-        name: 'pageRegister',
-        component: PageRegister,
+        name: 'registerPage',
+        component: RegisterPage
     },
     // CRUD protette
     {
@@ -45,24 +45,35 @@ const routes = [
         name: 'admin',
         component: DashboardPage,
         meta: { requiresAuth: true },
-        children : [
-            {
-                path: 'property',
-                name: 'propertyIndex',
-                component: PropertyPageIndex,
-                children : [
-                    {
-                        path: 'create',
-                        name: 'createPropertyPage',
-                        component: CreatePropertyPage,
-                    },
-                    // {
-                    //     Update
-                    // }
-                ]
-            }
-        ]
     },
+    {
+        path: '/admin/properties',
+        name: 'propertiesIndex',
+        component: PropertiesIndex,
+        meta: { requiresAuth: true },
+
+    },
+    {
+        path: '/admin/properties/:slug',
+        name: 'propertyShow',
+        component: PropertyShow,
+        meta: { requiresAuth: true },
+        props: true
+    },
+    {
+        path: '/admin/properties/create',
+        name: 'propertyCreate',
+        component: PropertyCreate,
+        meta: { requiresAuth: true },
+
+    },
+    {
+        path: '/admin/properties/update/:slug',
+        name: 'propertyUpdate',
+        component: PropertyUpdate,
+        meta: { requiresAuth: true },
+        props: true
+    }
 ];
 
 const router = new VueRouter({
@@ -74,16 +85,13 @@ const router = new VueRouter({
 export const auth = {
     loggedIn() {
         const token = localStorage.getItem('access_token');
-        return !!token; // restituisce true se il token esiste
+        return !!token;
     }
 };
 
 // Controllo autenticazione per l'accesso alle rotte protette
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
-      // this route requires auth, check if logged in
-      // if not, redirect to login page.
-
         if (!auth.loggedIn()) {
             next({
                 path: '/login',
@@ -92,12 +100,10 @@ router.beforeEach((to, from, next) => {
             } else {
                 next()
             }
-
     } else {
-        next() // make sure to always call next()!
+        next()
     }
 })
-
 export default router
 
 new Vue({

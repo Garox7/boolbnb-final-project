@@ -7,6 +7,7 @@
             :bed="property.bed_count"
             :bathroom="property.bathroom_count"
             :arrImages="property.property_images"
+            :slug="property.slug"
         />
     </div>
 </template>
@@ -24,9 +25,10 @@ export default {
         }
     },
     created() {
-        axios.get('api/properties')
+        axios.get('api/guest/properties')
             .then(response => {
                 this.arrProperties = response.data.results
+                console.log('proprietà', this.arrProperties);
             });
     }
 }

@@ -25,7 +25,7 @@
             <div v-if="errors.general">{{ errors.general }}</div>
             <button type="submit">Login</button>
         </form>
-        <p>Non hai un'account? <router-link :to="{name: 'pageRegister'}">Effettua la registrazione</router-link></p>
+        <p>Non hai un'account? <router-link :to="{name: 'registerPage'}">Effettua la registrazione</router-link></p>
     </div>
 </template>
 

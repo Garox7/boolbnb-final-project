@@ -2,10 +2,30 @@
 
 namespace App;
 
+use App\Traits\Slugger;
 use Illuminate\Database\Eloquent\Model;
 
 class Property extends Model
 {
+    use Slugger;
+
+    protected $fillable = [
+        'name',
+        'slug',
+        'description',
+        'address',
+        'bedroom_count',
+        'bathroom_count',
+        'bed_count',
+        'image',
+        'user_id'
+    ];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function user()
     {
         return $this->belongsTo('App\user');

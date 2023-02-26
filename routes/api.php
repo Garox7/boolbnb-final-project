@@ -17,20 +17,15 @@ use Illuminate\Support\Facades\Route;
 // Rotte pubbliche
 Route::post('/register', 'Api\AuthController@register');
 Route::post('/login', 'Api\AuthController@login');
-Route::get('/properties', 'Api\PropertyController@index');
+Route::get('/guest/properties', 'Api\PropertyController@guestIndex');
 Route::get('/properties/{property}', 'Api\PropertyController@show');
 
 // Rotte protette
 Route::middleware('auth:sanctum')
 ->group(function () {
     Route::post('/logout', 'Api\AuthController@logout');
+    Route::get('/properties', 'Api\PropertyController@index');
     Route::post('/properties', 'Api\PropertyController@store');
     Route::put('/properties/{property}', 'Api\PropertyController@update');
     Route::delete('/properties/{property}', 'Api\PropertyController@destroy');
-
 });
-
-// si può scrivere anche così
-// Route::group(['middleware' => ['auth:sanctum']],function () {
-//     Route::resource('properties', 'Api\PropertyController');
-// });

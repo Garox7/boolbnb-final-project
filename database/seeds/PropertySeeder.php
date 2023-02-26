@@ -22,9 +22,13 @@ class PropertySeeder extends Seeder
         $serviceCount = count($serviceId);
         $sponsorshipId = Sponsorship::all()->pluck('id');
 
+
         for ($i = 0; $i < 20; $i++) {
+            $name = $faker->words(rand(2, 5), true);
+
             $property = Property::create([
-                'name' => $faker->words(rand(2, 5), true),
+                'name' => $name,
+                'slug' => Property::getSlug($name),
                 'description' => $faker->paragraphs(2, true),
                 'user_id' => $faker->randomElement($userId)->id,
                 'address' => $faker->address(),

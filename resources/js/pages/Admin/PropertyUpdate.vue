@@ -1,6 +1,5 @@
 <template>
-    <h1>Crea la tua proprietà</h1>
-
+    <h1>Aggiorna la proprietà</h1>
 </template>
 
 <script>

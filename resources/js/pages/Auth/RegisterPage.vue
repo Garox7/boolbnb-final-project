@@ -2,7 +2,6 @@
     <div>
         <h1>Pagina di registrazione</h1>
         <form @submit.prevent="submitForm">
-
             <div>
                 <label for="first_name">Nome</label>
                 <input
