@@ -61,7 +61,7 @@ const routes = [
         props: true
     },
     {
-        path: '/admin/properties/create',
+        path: '/admin/properties/property/create',
         name: 'propertyCreate',
         component: PropertyCreate,
         meta: { requiresAuth: true },

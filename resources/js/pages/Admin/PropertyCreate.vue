@@ -7,6 +7,10 @@
                 <input type="text" name="name" v-model="property.name">
             </div>
             <div>
+                <label for="slug">Slug:</label>
+                <input type="text" name="slug" v-model="property.slug">
+            </div>
+            <div>
                 <label for="description">Description:</label>
                 <textarea name="description" v-model="property.description"></textarea>
             </div>
@@ -28,7 +32,17 @@
             </div>
             <div>
                 <label for="image">Image:</label>
-                <input type="file" name="image" v-on:change="onFileChange">
+                <input type="file" name="image[]" @change="onFileChange" multiple>
+                <div>
+                    <div v-for="(preview, index) in property.imagePreviews" :key="index">
+                        <img :src="preview" class="img-preview">
+                        <button @click="removeImage(index)">Remove</button>
+                    </div>
+
+                    <div v-if="property.imagesArray.length < 10">
+                        <button @click="addNewImageInput">Add new image</button>
+                    </div>
+                </div>
             </div>
             <button type="submit">Create Property</button>
         </form>
@@ -41,25 +55,30 @@ export default {
         return {
             property: {
                 name: '',
+                slug: '',
                 description: '',
                 address: '',
                 bedroom_count: 0,
                 bathroom_count: 0,
                 bed_count: 0,
-                image: ''
+                imagesArray: [],
+                imagePreviews: []
             }
         }
     },
     methods: {
         submitForm() {
-            let formData = new FormData();
+            const formData = new FormData();
             formData.append('name', this.property.name);
+            formData.append('slug', this.property.slug);
             formData.append('description', this.property.description);
             formData.append('address', this.property.address);
             formData.append('bedroom_count', this.property.bedroom_count);
             formData.append('bathroom_count', this.property.bathroom_count);
             formData.append('bed_count', this.property.bed_count);
-            formData.append('image', this.property.image);
+            for (let i = 0; i < this.property.imagesArray.length; i++) {
+                formData.append('image[]', this.property.imagesArray[i]);
+            }
 
             axios.post('/api/properties', formData, {
                 headers: {
@@ -67,19 +86,45 @@ export default {
                     Authorization: `Bearer ${localStorage.getItem('access_token')}`,
                 }
             }).then(response => {
-                this.$router.push('/properties/' + response.data.id);
+                this.$router.push('/admin/properties/' + response.data.slug);
             }).catch(error => {
                 console.error(error.response);
             });
         },
         onFileChange(event) {
-            const file = event.target.files[0];
-            this.property.image = file;
+            const files = event.target.files;
+            if (files.length > 0) {
+                for (let i = 0; i < files.length; i++) {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(files[i]);
+                    reader.onload = () => {
+                        this.property.imagesArray.push(files[i]);
+                        this.property.imagePreviews.push(reader.result);
+                    }
+                }
+                console.log(this.property.imagesArray); // DEBUG
+            }
+        },
+        removeImage(index) {
+            console.log('Removing image at index:', index); // DEBUG
+            this.property.imagePreviews.splice(index, 1);
+            this.property.imagesArray.splice(index, 1);
+            console.log(this.property.imagesArray); // DEBUG
+        },
+        addNewImageInput() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.name = 'image[]';
+            input.addEventListener('change', this.onFileChange);
+            input.click();
         }
     }
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+.img-preview {
+    width: 150px;
+    height: 150px;
+}
 </style>

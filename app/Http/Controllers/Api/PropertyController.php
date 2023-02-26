@@ -39,11 +39,12 @@ class PropertyController extends Controller
         //
     }
 
-    public function store($request)
+    public function store(Request $request)
     {
         // Validazione
         $request->validate([
             'name' => 'required|string|max:255',
+            'slug' => 'required|string|max:100|unique:properties',
             'description' => 'string',
             'address' => 'required|string|max:255',
             'bedroom_count' => 'required|integer|min:1|max:20',
@@ -55,19 +56,27 @@ class PropertyController extends Controller
         $data = $request->all();
 
         // Crea la nuova proprietà
-        $property = Property::create($data);
-        $data['user_id'] = auth()->user()->id;
+        $property = new Property();
+        $property->name = $data['name'];
+        $property->slug = $data['slug'];
+        $property->description = $data['description'];
+        $property->address = $data['address'];
+        $property->bedroom_count = $data['bedroom_count'];
+        $property->bed_count = $data['bed_count'];
+        $property->bathroom_count = $data['bathroom_count'];
+        $property->user_id = auth()->id();
+        $property->save();
 
         // Salvataggio delle immagini
-        // if ($request->hasFile('image')) {
-        //     foreach ($request->file('image') as $image) {
-        //         $path = $image->store('uploads');
-        //         $propertyImage = new PropertyImages();
-        //         $propertyImage->property_id = $property->id;
-        //         $propertyImage->image = $path;
-        //         $propertyImage->save();
-        //     }
-        // }
+        if ($request->hasFile('image')) {
+            foreach ($request->file('image') as $image) {
+                $path = $image->store('uploads');
+                $propertyImage = new PropertyImages();
+                $propertyImage->property_id = $property->id;
+                $propertyImage->image = $path;
+                $propertyImage->save();
+            }
+        }
 
         return response()->json($property, 201);
     }
