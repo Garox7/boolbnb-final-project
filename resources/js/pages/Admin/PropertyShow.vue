@@ -2,6 +2,10 @@
     <div>
         <h1>Pagina di proprietà singola dell'admin</h1>
         <h4>{{ objProperty.name }}</h4>
+        <img
+            v-for="image in objProperty.property_images"
+            :key="image.id"
+            :src="'/storage/' + image.image" alt="">
     </div>
 </template>
 
