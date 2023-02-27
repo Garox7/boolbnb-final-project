@@ -64,7 +64,7 @@ const routes = [
 
     },
     {
-        path: '/admin/properties/:slug/update',
+        path: '/admin/properties/update/:slug',
         name: 'propertyUpdate',
         component: PropertyUpdate,
         meta: { requiresAuth: true },
