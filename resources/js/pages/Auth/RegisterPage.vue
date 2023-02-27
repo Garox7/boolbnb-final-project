@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <div class="container">
         <h1>Pagina di registrazione</h1>
-        <form @submit.prevent="submitForm">
-            <div>
+        <form @submit.prevent="submitForm" class="cont_form">
+            <div class="input_form">
                 <label for="first_name">Nome</label>
                 <input
                     type="text"
@@ -13,7 +13,7 @@
                 <div v-if="errors.first_name">{{ errors.first_name }}</div>
             </div>
 
-            <div>
+            <div class="input_form">
                 <label for="last_name">Cognome</label>
                 <input
                     type="text"
@@ -24,7 +24,7 @@
                 <div v-if="errors.last_name">{{ errors.last_name }}</div>
             </div>
 
-            <div>
+            <div class="input_form">
                 <label for="email">E-mail</label>
                 <input
                     type="email"
@@ -35,7 +35,7 @@
                 <div v-if="errors.email">{{ errors.email }}</div>
             </div>
 
-            <div>
+            <div class="input_form">
                 <label for="date_of_birth">Data di nascita</label>
                 <input
                     type="date"
@@ -46,7 +46,7 @@
                 <div v-if="errors.date_of_birth">{{ errors.date_of_birth }}</div>
             </div>
 
-            <div>
+            <div class="input_form">
                 <label for="password">Password</label>
                 <input
                     type="password"
@@ -57,7 +57,7 @@
                 <div v-if="errors.password">{{ errors.password }}</div>
             </div>
 
-            <div>
+            <div class="input_form">
                 <label for="password_confirmation">Conferma password</label>
                 <input
                     type="password"
@@ -68,7 +68,7 @@
                 <div v-if="errors.password_confirmation">{{ errors.password_confirmation }}</div>
             </div>
 
-            <button type="submit">Registrati</button>
+            <button type="submit" class="register_button">Registrati</button>
         </form>
     </div>
 </template>
@@ -145,5 +145,28 @@ export default {
 <style>
     .is-invalid {
         border-color: red;
+    }
+    h1{
+        color: var(--button-color);
+    }
+    .container{
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .cont_form{
+        margin: 1rem 15rem;
+        background-color: rgb(174, 207, 250);
+        padding: 3rem;
+    }
+    .input_form{
+        padding-bottom:1rem;
+    }
+    .register_button{
+        padding: .3rem .5rem;
+        background-color: rgb(114, 150, 197);
+        border-color:rgb(114, 150, 197);
+        color: white;
     }
 </style>

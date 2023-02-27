@@ -1,39 +1,40 @@
 <template>
-    <div>
+    <div class="main">
         <h1>Crea la tua proprietà</h1>
-        <form @submit.prevent="submitForm">
-            <div>
-                <label for="name">Nome:</label>
-                <input type="text" name="name" v-model="property.name">
+        <form @submit.prevent="submitForm" class="form">
+            <div class="form-type">
+                <label for="name" class="input-form">Nome:</label>
+                <input type="text" name="name" class="input-form" v-model="property.name">
+            </div>
+            <div class="form-type">
+                <label for="slug" class="input-form">Slug:</label>
+                <input type="text" name="slug" class="input-form" v-model="property.slug">
+            </div>
+            <div class="form-type">
+                <label for="description" class="input-form">Description:</label>
+                <textarea name="description" class="input-form" v-model="property.description"></textarea>
+            </div>
+            <div class="form-type">
+                <label for="address" class="input-form">Address:</label>
+                <input type="text" name="address" class="input-form" v-model="property.address">
+            </div>
+            <div class="form-type">
+                <label for="bedroom_count" class="input-form">Rooms:</label>
+                <input type="number" name="bedroom_count" class="input-form" v-model="property.bedroom_count">
+            </div>
+            <div class="form-type">
+                <label for="bathroom_count" class="input-form">Bathroom_count:</label>
+                <input type="number" name="bathroom_count" class="input-form" v-model="property.bathroom_count">
+            </div>
+            <div class="form-type">
+                <label for="bed_count" class="input-form">Bed_count:</label>
+                <input type="number" name="bed_count" class="input-form" v-model="property.bed_count">
+            </div>
+            <div class="form-type">
+                <label for="image" class="input-form">Image:</label>
+                <input type="file" name="image[]" class="input-form" @change="onFileChange" multiple>
             </div>
             <div>
-                <label for="slug">Slug:</label>
-                <input type="text" name="slug" v-model="property.slug">
-            </div>
-            <div>
-                <label for="description">Description:</label>
-                <textarea name="description" v-model="property.description"></textarea>
-            </div>
-            <div>
-                <label for="address">Address:</label>
-                <input type="text" name="address" v-model="property.address">
-            </div>
-            <div>
-                <label for="bedroom_count">Rooms:</label>
-                <input type="number" name="bedroom_count" v-model="property.bedroom_count">
-            </div>
-            <div>
-                <label for="bathroom_count">Bathroom_count:</label>
-                <input type="number" name="bathroom_count" v-model="property.bathroom_count">
-            </div>
-            <div>
-                <label for="bed_count">Bed_count:</label>
-                <input type="number" name="bed_count" v-model="property.bed_count">
-            </div>
-            <div>
-                <label for="image">Image:</label>
-                <input type="file" name="image[]" @change="onFileChange" multiple>
-                <div>
                     <div v-for="(preview, index) in property.imagePreviews" :key="index">
                         <img :src="preview" class="img-preview">
                         <button @click="removeImage(index)">Remove</button>
@@ -43,7 +44,7 @@
                         <button @click="addNewImageInput">Add new image</button>
                     </div>
                 </div>
-            </div>
+
             <button type="submit">Create Property</button>
         </form>
     </div>
@@ -120,8 +121,38 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.main{
+    background-color: rgb(174, 207, 250);
+}
+h1{
+    text-align: center;
+}
+.form{
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 4rem;
+}
+label{
+    padding-right: .5rem;
+}
+.form-type{
+    margin-bottom: .5rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+.input-form{
+    flex: 0 0 50%;
+}
+
 .img-preview {
     width: 150px;
     height: 150px;
+}
+button{
+    padding: .3rem .5rem;
+    background-color: rgb(114, 150, 197);
+    border-color:rgb(114, 150, 197);
+    color: white;
 }
 </style>

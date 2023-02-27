@@ -1,8 +1,8 @@
 <template>
-    <div>
-        <h1>Pagina di login</h1>
-        <form @submit.prevent="submitForm">
-            <div>
+    <div class="container">
+        <h1>Login Utente</h1>
+        <form @submit.prevent="submitForm" class="cont_form">
+            <div class="email">
                 <label for="email">E-mail</label>
                 <input
                     type="email"
@@ -12,7 +12,7 @@
                 />
                 <div v-if="errors.email">{{ errors.email }}</div>
             </div>
-            <div>
+            <div class="password">
                 <label for="password">Password</label>
                 <input
                     type="password"
@@ -23,7 +23,7 @@
                 <div v-if="errors.password">{{ errors.password }}</div>
             </div>
             <div v-if="errors.general">{{ errors.general }}</div>
-            <button type="submit">Login</button>
+            <button type="submit" class="login_button">Login</button>
         </form>
         <p>Non hai un'account? <router-link :to="{name: 'registerPage'}">Effettua la registrazione</router-link></p>
     </div>
@@ -84,5 +84,31 @@ export default {
 <style lang="scss" scoped>
     .is-invalid {
         border-color: red;
+    }
+    h1{
+        color: var(--button-color);
+    }
+    .container{
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .cont_form{
+        margin: 1rem 15rem;
+        background-color: rgb(174, 207, 250);
+        padding: 3rem;
+    }
+    .email , .password{
+        padding-bottom:1rem;
+    }
+    label{
+        margin-right:1rem;
+    }
+    .login_button{
+        padding: .3rem .5rem;
+        background-color: rgb(114, 150, 197);
+        border-color:rgb(114, 150, 197);
+        color: white;
     }
 </style>
