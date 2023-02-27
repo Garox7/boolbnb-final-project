@@ -86,7 +86,7 @@ export default {
                     Authorization: `Bearer ${localStorage.getItem('access_token')}`,
                 }
             }).then(response => {
-                this.$router.push('/admin/properties/' + response.data.slug);
+                this.$router.push('/properties/' + response.data.slug);
             }).catch(error => {
                 console.error(error.response);
             });
@@ -102,14 +102,11 @@ export default {
                         this.property.imagePreviews.push(reader.result);
                     }
                 }
-                console.log(this.property.imagesArray); // DEBUG
             }
         },
         removeImage(index) {
-            console.log('Removing image at index:', index); // DEBUG
             this.property.imagePreviews.splice(index, 1);
             this.property.imagesArray.splice(index, 1);
-            console.log(this.property.imagesArray); // DEBUG
         },
         addNewImageInput() {
             const input = document.createElement('input');

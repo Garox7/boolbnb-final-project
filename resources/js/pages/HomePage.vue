@@ -25,7 +25,7 @@ export default {
         }
     },
     created() {
-        axios.get('api/guest/properties')
+        axios.get('/api/guest/properties')
             .then(response => {
                 this.arrProperties = response.data.results
                 console.log('proprietà', this.arrProperties);

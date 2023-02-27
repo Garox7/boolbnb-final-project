@@ -4,6 +4,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 import Vue from 'vue';
 import App from './App';
 import VueRouter from 'vue-router';
+// import auth from './auth.js'; // TODO: provare a separarein file diversi: auth.js, e front.js.
 import HomePage from './pages/HomePage';
 import PropertyPage from './pages/PropertyPage';
 import LoginPage from './pages/Auth/LoginPage';
@@ -13,6 +14,7 @@ import PropertiesIndex from './pages/Admin/PropertiesIndex';
 import PropertyShow from './pages/Admin/PropertyShow';
 import PropertyCreate from './pages/Admin/PropertyCreate';
 import PropertyUpdate from './pages/Admin/PropertyUpdate';
+import Page404 from './pages/Page404';
 
 Vue.use(VueRouter);
 
@@ -23,9 +25,9 @@ const routes = [
         component: HomePage
     },
     {
-        path: '/property/:slug',
-        name: 'propertyPage',
-        component: PropertyPage,
+        path: '/properties/:slug',
+        name: 'propertyShow',
+        component: PropertyShow,
         props: true
     },
     // Auth
@@ -53,27 +55,26 @@ const routes = [
         meta: { requiresAuth: true },
 
     },
+
     {
-        path: '/admin/properties/:slug',
-        name: 'propertyShow',
-        component: PropertyShow,
-        meta: { requiresAuth: true },
-        props: true
-    },
-    {
-        path: '/admin/properties/property/create',
+        path: '/admin/properties/create',
         name: 'propertyCreate',
         component: PropertyCreate,
         meta: { requiresAuth: true },
 
     },
     {
-        path: '/admin/properties/update/:slug',
+        path: '/admin/properties/:slug/update',
         name: 'propertyUpdate',
         component: PropertyUpdate,
         meta: { requiresAuth: true },
         props: true
-    }
+    },
+    {
+        path: '*',
+        name: 'page404',
+        component: Page404,
+    },
 ];
 
 const router = new VueRouter({
@@ -81,7 +82,7 @@ const router = new VueRouter({
     routes
 })
 
-
+// Controllo autenticazione per l'accesso alle rotte protette
 export const auth = {
     loggedIn() {
         const token = localStorage.getItem('access_token');
@@ -89,7 +90,6 @@ export const auth = {
     }
 };
 
-// Controllo autenticazione per l'accesso alle rotte protette
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
         if (!auth.loggedIn()) {
@@ -104,7 +104,9 @@ router.beforeEach((to, from, next) => {
         next()
     }
 })
+
 export default router
+/**********************************/
 
 new Vue({
     el: '#app',

@@ -1,22 +1,30 @@
 <template>
-    <div>
-        <h1>Pagina di proprietà singola dell'admin</h1>
-        <h4>{{ objProperty.name }}</h4>
-        <img
+        <Page404 v-if="is404" />
+        <div v-else-if="objProperty">
+            <h1>Pagina di proprietà singola dell'admin</h1>
+            <h4>{{ objProperty.name }}</h4>
+            <img
             v-for="image in objProperty.property_images"
             :key="image.id"
             :src="'/storage/' + image.image" alt="">
-    </div>
+        </div>
+        <div v-else>Loading...</div>
 </template>
 
 <script>
+import Page404 from '../Page404.vue';
+
 export default {
+    components: {
+        Page404,
+    },
     props: [
         'slug',
     ],
     data() {
         return {
-            objProperty: [],
+            objProperty: null,
+            is404: null,
         }
     },
     created() {
