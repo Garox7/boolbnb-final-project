@@ -49,6 +49,7 @@ export default {
     }
 }
 
+
 @media screen and (min-width: 550px) {
     .property-container .card-container {
         flex: 1 1 calc(50% - 1.5rem);
