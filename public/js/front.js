@@ -3882,7 +3882,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.is-invalid {\n    border-color: red;\n}\nh1{\n    color: var(--button-color);\n}\n.container{\n    max-width: 1200px;\n    margin: 0 auto;\n    text-align: center;\n}\n.cont_form{\n    margin: 1rem 15rem;\n    background-color: rgb(174, 207, 250);\n    padding: 3rem;\n}\n.input_form{\n    padding-bottom:1rem;\n}\n.register_button{\n    padding: .3rem .5rem;\n    background-color: rgb(114, 150, 197);\n    border-color:rgb(114, 150, 197);\n    color: white;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.is-invalid {\n    border-color: red;\n}\nh1{\n    color: var(--button-color);\n}\n.container{\n    max-width: 1200px;\n    margin: 0 auto;\n    text-align: center;\n}\n.cont_form{\n    margin: 1rem 13rem;\n    background-color: rgb(174, 207, 250);\n    padding: 3rem;\n}\n.input_form{\n    padding-bottom:1rem;\n}\n.register_button{\n    padding: .3rem .5rem;\n    background-color: rgb(114, 150, 197);\n    border-color:rgb(114, 150, 197);\n    color: white;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

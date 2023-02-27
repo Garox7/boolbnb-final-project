@@ -156,7 +156,7 @@ export default {
     }
 
     .cont_form{
-        margin: 1rem 15rem;
+        margin: 1rem 13rem;
         background-color: rgb(174, 207, 250);
         padding: 3rem;
     }
