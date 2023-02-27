@@ -1,10 +1,10 @@
 <template>
-    <div v-if="objProp">
-        <h1>{{ objProp.name }}</h1>
+    <div v-if="property">
+        <h1>{{ property.name }}</h1>
         <img :src="'/storage/' + objPost.uploaded_img" :alt="objPost.title">
-        <h2>{{ objProp.address }}</h2>
+        <h2>{{ property.address }}</h2>
         <p>
-            {{ objProp.description }}
+            {{ property.description }}
         </p>
 
     </div>
@@ -18,22 +18,23 @@ export default {
     //],
     data() {
         return {
-            objProp: null,
+            property: null,
         }
     },
     created() {
         axios.get('/api/posts/' + this.slug)
-            .then(response => this.objProp = response.data.results);
+            .then(response => this.property = response.data.results);
     }
 }
 </script>
 
 <style lang="scss" scoped>
     .tag {
+
         display: inline-block;
         margin: .3em;
         padding: .4em .6em;
         border-radius: 10em;
-        background-color: salmon;
+        background-color: red;
     }
 </style>

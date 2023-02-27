@@ -1939,13 +1939,13 @@ __webpack_require__.r(__webpack_exports__);
   //],
   data: function data() {
     return {
-      objProp: null
+      property: null
     };
   },
   created: function created() {
     var _this = this;
     axios.get('/api/posts/' + this.slug).then(function (response) {
-      return _this.objProp = response.data.results;
+      return _this.property = response.data.results;
     });
   }
 });
@@ -2398,12 +2398,12 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _vm.objProp ? _c("div", [_c("h1", [_vm._v(_vm._s(_vm.objProp.name))]), _vm._v(" "), _c("img", {
+  return _vm.property ? _c("div", [_c("h1", [_vm._v(_vm._s(_vm.property.name))]), _vm._v(" "), _c("img", {
     attrs: {
       src: "/storage/" + _vm.objPost.uploaded_img,
       alt: _vm.objPost.title
     }
-  }), _vm._v(" "), _c("h2", [_vm._v(_vm._s(_vm.objProp.address))]), _vm._v(" "), _c("p", [_vm._v("\n        " + _vm._s(_vm.objProp.description) + "\n    ")])]) : _vm._e();
+  }), _vm._v(" "), _c("h2", [_vm._v(_vm._s(_vm.property.address))]), _vm._v(" "), _c("p", [_vm._v("\n        " + _vm._s(_vm.property.description) + "\n    ")])]) : _vm._e();
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -2569,7 +2569,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".tag[data-v-64faed8d] {\n  display: inline-block;\n  margin: 0.3em;\n  padding: 0.4em 0.6em;\n  border-radius: 10em;\n  background-color: salmon;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".tag[data-v-64faed8d] {\n  display: inline-block;\n  margin: 0.3em;\n  padding: 0.4em 0.6em;\n  border-radius: 10em;\n  background-color: red;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
