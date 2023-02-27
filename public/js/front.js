@@ -2248,7 +2248,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     var _this = this;
-    axios.get('api/guest/properties').then(function (response) {
+    axios.get('/api/guest/properties').then(function (response) {
       _this.arrProperties = response.data.results;
       console.log('proprietà', _this.arrProperties);
     });

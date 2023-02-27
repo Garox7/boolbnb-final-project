@@ -25,7 +25,7 @@ export default {
         }
     },
     created() {
-        axios.get('api/guest/properties')
+        axios.get('/api/guest/properties')
             .then(response => {
                 this.arrProperties = response.data.results
                 console.log('proprietà', this.arrProperties);
@@ -48,6 +48,7 @@ export default {
         position: relative;
     }
 }
+//ciao
 
 @media screen and (min-width: 550px) {
     .property-container .card-container {
