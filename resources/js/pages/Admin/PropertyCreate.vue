@@ -1,6 +1,7 @@
 <template>
     <div>
         <h1>Crea la tua proprietà</h1>
+
         <form @submit.prevent="submitForm">
             <div>
                 <label for="name">Nome:</label>
