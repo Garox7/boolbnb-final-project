@@ -48,7 +48,7 @@ export default {
         position: relative;
     }
 }
-//ciao
+
 
 @media screen and (min-width: 550px) {
     .property-container .card-container {
