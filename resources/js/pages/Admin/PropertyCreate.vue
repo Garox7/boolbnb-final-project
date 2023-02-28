@@ -36,11 +36,11 @@
                 <div>
                     <div v-for="(preview, index) in property.imagePreviews" :key="index">
                         <img :src="preview" class="img-preview">
-                        <button @click="removeImage(index)">Remove</button>
+                        <button type="button" @click="removeImage(index)">Rimuovi</button>
                     </div>
 
                     <div v-if="property.imagesArray.length < 10">
-                        <button @click="addNewImageInput">Add new image</button>
+                        <button type="button" @click="addNewImageInput">Aggiungi immagine</button>
                     </div>
                 </div>
             </div>

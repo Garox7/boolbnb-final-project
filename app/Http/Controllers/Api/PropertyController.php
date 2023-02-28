@@ -110,7 +110,7 @@ class PropertyController extends Controller
             ->with(['property_images' => function ($query) {
                 $query->select('id', 'property_id', 'image');
             }])
-            ->select('id', 'name', 'description', 'address', 'bedroom_count', 'bathroom_count','bed_count', 'slug')
+            ->select('id', 'name', 'description', 'address', 'bedroom_count', 'bathroom_count','bed_count', 'slug', 'name')
             ->first();
 
         return response()->json([
@@ -134,6 +134,7 @@ class PropertyController extends Controller
         ]);
 
         $data = $request->all();
+        // dd($data);
 
         // Crea la nuova proprietà
         $property->name = $data['name'];
@@ -143,7 +144,7 @@ class PropertyController extends Controller
         $property->bedroom_count = $data['bedroom_count'];
         $property->bed_count = $data['bed_count'];
         $property->bathroom_count = $data['bathroom_count'];
-        $property->user_id = auth()->id();
+        // $property->user_id = auth()->id();
         $property->update();
 
         // Salvataggio delle immagini
@@ -153,7 +154,7 @@ class PropertyController extends Controller
                 $propertyImage = new PropertyImages();
                 $propertyImage->property_id = $property->id;
                 $propertyImage->image = $path;
-                $propertyImage->save();
+                $propertyImage->update();
             }
         }
 

@@ -26,7 +26,7 @@ Route::middleware('auth:sanctum')
     Route::post('/logout', 'Api\AuthController@logout');
     Route::get('/properties', 'Api\PropertyController@index');
     Route::post('/properties', 'Api\PropertyController@store');
-    Route::get('/properties/update/{property}', 'Api\PropertyController@edit');
-    Route::put('/properties/{property}', 'Api\PropertyController@update');
+    Route::get('/properties/edit/{property}', 'Api\PropertyController@edit');
+    Route::post('/properties/{property}', 'Api\PropertyController@update');
     Route::delete('/properties/{property}', 'Api\PropertyController@destroy');
 });

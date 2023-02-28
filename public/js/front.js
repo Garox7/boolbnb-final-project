@@ -2073,8 +2073,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-// TODO: creare un componente separato che gestisca le immagini
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['slug'],
   data: function data() {
@@ -2088,19 +2086,22 @@ __webpack_require__.r(__webpack_exports__);
         bedroom_count: 0,
         bathroom_count: 0,
         bed_count: 0,
+        imageOldArray: [],
         imagesArray: [],
         imagePreviews: []
-      }
+      },
+      newPreview: false
     };
   },
-  mounted: function mounted() {
+  created: function created() {
     var _this = this;
-    axios.get('/api/properties/update/' + this.slug, {
+    axios.get('/api/properties/edit/' + this.slug, {
       headers: {
         'Content-Type': 'multipart/form-data',
         Authorization: "Bearer ".concat(localStorage.getItem('access_token'))
       }
     }).then(function (response) {
+      console.log(response);
       if (response.data.success) {
         var property = response.data.results;
         console.log(property);
@@ -2112,7 +2113,7 @@ __webpack_require__.r(__webpack_exports__);
           bedroom_count: property.bedroom_count,
           bathroom_count: property.bathroom_count,
           bed_count: property.bed_count,
-          imagesArray: property.property_images,
+          imageOldArray: property.property_images,
           imagePreviews: property.property_images
         };
         console.log(_this.property.imagePreviews);
@@ -2124,18 +2125,19 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     submitForm: function submitForm() {
       var _this2 = this;
+      console.log('mi hai inviato');
       var formData = new FormData();
       formData.append('name', this.property.name);
       formData.append('slug', this.property.slug);
       formData.append('description', this.property.description);
       formData.append('address', this.property.address);
       formData.append('bedroom_count', this.property.bedroom_count);
-      formData.append('bathroom_count', this.property.bathroom_count);
       formData.append('bed_count', this.property.bed_count);
+      formData.append('bathroom_count', this.property.bathroom_count);
       for (var i = 0; i < this.property.imagesArray.length; i++) {
         formData.append('image[]', this.property.imagesArray[i]);
       }
-      axios.put('/api/properties/' + this.slug, formData, {
+      axios.post('/api/properties/' + this.slug, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: "Bearer ".concat(localStorage.getItem('access_token'))
@@ -2143,19 +2145,19 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         _this2.$router.push('/properties/' + response.data.slug);
       })["catch"](function (error) {
-        console.error(error.response);
+        console.error(error.response.data.errors);
       });
     },
     onFileChange: function onFileChange(event) {
-      var _this3 = this;
       var files = event.target.files;
       if (files.length > 0) {
         var _loop = function _loop(i) {
           var reader = new FileReader();
           reader.readAsDataURL(files[i]);
           reader.onload = function () {
-            _this3.property.imagesArray.push(files[i]);
-            _this3.property.imagePreviews.push(reader.result);
+            this.property.imagesArray.push(files[i]);
+            this.property.imagePreviews.push(reader.result);
+            // this.createImgPreview(reader.result);
           };
         };
         for (var i = 0; i < files.length; i++) {
@@ -2163,14 +2165,20 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
     },
+    removeOldImage: function removeOldImage(index) {
+      this.property.imageOldArray.splice(index, 1);
+      // funzione di rimozione immagine vecchia dal database con richiesta axios
+    },
     removeImage: function removeImage(index) {
-      this.property.imagePreviews.splice(index, 1);
       this.property.imagesArray.splice(index, 1);
+      this.property.imagePreviews.splice(index, 1);
     },
     addNewImageInput: function addNewImageInput() {
+      this.newPreview = true;
       var input = document.createElement('input');
       input.type = 'file';
       input.name = 'image[]';
+      input.multiple = true;
       input.addEventListener('change', this.onFileChange);
       input.click();
     }
@@ -3070,17 +3078,23 @@ var render = function render() {
         src: preview
       }
     }), _vm._v(" "), _c("button", {
+      attrs: {
+        type: "button"
+      },
       on: {
         click: function click($event) {
           return _vm.removeImage(index);
         }
       }
-    }, [_vm._v("Remove")])]);
+    }, [_vm._v("Rimuovi")])]);
   }), _vm._v(" "), _vm.property.imagesArray.length < 10 ? _c("div", [_c("button", {
+    attrs: {
+      type: "button"
+    },
     on: {
       click: _vm.addNewImageInput
     }
-  }, [_vm._v("Add new image")])]) : _vm._e()], 2)]), _vm._v(" "), _c("button", {
+  }, [_vm._v("Aggiungi immagine")])]) : _vm._e()], 2)]), _vm._v(" "), _c("button", {
     attrs: {
       type: "submit"
     }
@@ -3316,35 +3330,58 @@ var render = function render() {
     attrs: {
       "for": "image"
     }
-  }, [_vm._v("Image:")]), _vm._v(" "), _c("input", {
-    attrs: {
-      type: "file",
-      name: "image[]",
-      multiple: ""
-    },
-    on: {
-      change: _vm.onFileChange
-    }
-  }), _vm._v(" "), _c("div", [_vm._l(_vm.property.imagePreviews, function (preview, index) {
+  }, [_vm._v("Foto Proprietà")]), _vm._v(" "), _c("div", [_vm._l(_vm.property.imageOldArray, function (preview, index) {
     return _c("div", {
-      key: index
+      key: index,
+      staticClass: "image-container"
     }, [_c("img", {
       staticClass: "img-preview",
       attrs: {
         src: "/storage/" + preview.image
       }
     }), _vm._v(" "), _c("button", {
+      attrs: {
+        type: "button"
+      },
+      on: {
+        click: function click($event) {
+          return _vm.removeOldImage(index);
+        }
+      }
+    }, [_vm._v("Rimuovi")])]);
+  }), _vm._v(" "), _c("div", {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: _vm.newPreview && _vm.property.imagePreviews.length,
+      expression: "newPreview && property.imagePreviews.length"
+    }]
+  }, _vm._l(_vm.property.imagePreviews, function (preview, index) {
+    return _c("div", {
+      key: index
+    }, [_c("img", {
+      staticClass: "img-preview",
+      attrs: {
+        src: preview
+      }
+    }), _vm._v(" "), _c("button", {
+      attrs: {
+        type: "button"
+      },
       on: {
         click: function click($event) {
           return _vm.removeImage(index);
         }
       }
-    }, [_vm._v("Remove")])]);
-  }), _vm._v(" "), _vm.property.imagesArray.length < 10 && _vm.property.imagesArray.length ? _c("div", [_c("button", {
+    }, [_vm._v("Rimuovi")])]);
+  }), 0), _vm._v(" "), _vm.property.imageOldArray.length < 10 ? _c("div", [_c("button", {
+    attrs: {
+      type: "button"
+    },
     on: {
       click: _vm.addNewImageInput
     }
-  }, [_vm._v("Add new image")])]) : _vm._e()], 2)]), _vm._v(" "), _c("button", {
+  }, [_vm._v("Aggiungi immagine")])]) : _vm._e()], 2)]), _vm._v(" "), _c("button", {
     attrs: {
       type: "submit"
     }
@@ -4067,7 +4104,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nimg {\n    width: 100px;\n    height: 100px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nimg {\n    width: 100px;\n    height: 100px;\n}\nbutton {\n    margin-top: 15px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
