@@ -16,9 +16,10 @@ const routes = [
         component: PageHome,
     },
     {
-        path: '/properties',
-        name: 'PageProperty',
+        path: '/properties/:slug',
+        name: 'pageProperty',
         component: PageProperty,
+        props: true,
     }
 ];
 

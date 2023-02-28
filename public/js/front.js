@@ -1863,7 +1863,8 @@ __webpack_require__.r(__webpack_exports__);
     address: String,
     bed: String,
     bathroom: String,
-    arrImages: Array
+    arrImages: Array,
+    slug: String
   },
   data: function data() {
     return {
@@ -1915,6 +1916,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
     axios.get('api/properties').then(function (response) {
       _this.arrProperties = response.data.results;
+      console.log(_this.arrProperties);
     });
   }
 });
@@ -1934,18 +1936,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 // TODO: gestire la 404 dei post non esistenti
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  //props: [
-  //    'slug',
-  //],
+  props: ['slug'],
   data: function data() {
     return {
-      property: null
+      propertyArray: null
     };
   },
   created: function created() {
     var _this = this;
-    axios.get('/api/posts/' + this.slug).then(function (response) {
-      return _this.property = response.data.results;
+    axios.get('/api/properties/' + this.slug).then(function (response) {
+      _this.propertyArray = response.data.results;
+      console.log(_this.propertyArray);
     });
   }
 });
@@ -2297,7 +2298,10 @@ var render = function render() {
     staticClass: "property-link",
     attrs: {
       to: {
-        name: "PageProperty"
+        name: "pageProperty",
+        params: {
+          slug: _vm.slug
+        }
       }
     }
   }), _vm._v(" "), _c("div", {
@@ -2372,7 +2376,8 @@ var render = function render() {
         address: property.address,
         bed: property.bed_count,
         bathroom: property.bathroom_count,
-        arrImages: property.property_images
+        arrImages: property.property_images,
+        slug: property.slug
       }
     });
   }), 1);
@@ -2398,12 +2403,16 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _vm.property ? _c("div", [_c("h1", [_vm._v(_vm._s(_vm.property.name))]), _vm._v(" "), _c("img", {
-    attrs: {
-      src: "/storage/" + _vm.objPost.uploaded_img,
-      alt: _vm.objPost.title
-    }
-  }), _vm._v(" "), _c("h2", [_vm._v(_vm._s(_vm.property.address))]), _vm._v(" "), _c("p", [_vm._v("\n        " + _vm._s(_vm.property.description) + "\n    ")])]) : _vm._e();
+  return _vm.propertyArray ? _c("div", [_c("h1", [_vm._v(_vm._s(_vm.propertyArray.name))]), _vm._v(" "), _vm._l(_vm.propertyArray.property_images, function (images) {
+    return _c("div", {
+      key: images.id
+    }, [_c("img", {
+      attrs: {
+        src: "/storage/" + images.image,
+        alt: images.id
+      }
+    })]);
+  }), _vm._v(" "), _c("h2", [_vm._v(_vm._s(_vm.propertyArray.address))]), _vm._v(" "), _c("p", [_vm._v("\n        " + _vm._s(_vm.propertyArray.description) + "\n    ")])], 2) : _vm._e();
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -2437,9 +2446,10 @@ var routes = [{
   name: 'pageHome',
   component: _pages_PageHome__WEBPACK_IMPORTED_MODULE_1__["default"]
 }, {
-  path: '/properties',
-  name: 'PageProperty',
-  component: _pages_PageProperty__WEBPACK_IMPORTED_MODULE_2__["default"]
+  path: '/properties/:slug',
+  name: 'pageProperty',
+  component: _pages_PageProperty__WEBPACK_IMPORTED_MODULE_2__["default"],
+  props: true
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
   mode: 'history',

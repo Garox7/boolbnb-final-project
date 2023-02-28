@@ -7,6 +7,7 @@
             :bed="property.bed_count"
             :bathroom="property.bathroom_count"
             :arrImages="property.property_images"
+            :slug="property.slug"
         />
     </div>
 </template>
@@ -27,6 +28,7 @@ export default {
         axios.get('api/properties')
             .then(response => {
                 this.arrProperties = response.data.results
+                console.log(this.arrProperties);
             });
     }
 }

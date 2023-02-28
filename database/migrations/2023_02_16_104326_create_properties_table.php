@@ -16,6 +16,7 @@ class CreatePropertiesTable extends Migration
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
             $table->string('name', 150);
+            $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->string('address', 150);

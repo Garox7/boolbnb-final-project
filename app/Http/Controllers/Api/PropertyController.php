@@ -16,7 +16,7 @@ class PropertyController extends Controller
                     $query->select('id', 'property_id', 'image');
                 },
             ])
-            ->select('id', 'address', 'bed_count', 'bathroom_count')
+            ->select('id', 'address', 'bed_count', 'bathroom_count', 'slug')
             ->get();
         return response()->json([
             'success' => true,
@@ -25,14 +25,12 @@ class PropertyController extends Controller
     }
     public function show()
     {
-        $properties = Property::where('status', 1 )
-            ->with([
+        $properties = Property::with([
                 'property_images' => function ($query) {
                     $query->select('id', 'property_id', 'image',);
-                }, 
+                },
             ])
-            ->select('id', 'name', 'description', 'user_id', 'address', 'latitude', 'longitude', 'bedroom_count', 'bed_cuont', 'bathroom_count', 'status', 'created_at', 'update_at', )
-            ->get();
+            ->first();
         return response()->json([
             'success' => true,
             'results' => $properties,

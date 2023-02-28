@@ -1,7 +1,7 @@
 <template>
     <!-- TODO: INSTALLARE VUE-TOUCH PER IL SUPPORTO PER IOS E ANDROID -->
     <div>
-        <router-link :to="{name: 'PageProperty'}" class="property-link"></router-link>
+        <router-link :to="{name: 'pageProperty',  params: {slug: slug}}" class="property-link"></router-link>
         <div class="wrap-container">
             <div class="images-container"
                 v-for="(images, i) in arrImages"
@@ -49,6 +49,7 @@ export default {
         bed: String,
         bathroom: String,
         arrImages: Array,
+        slug: String
     },
     data() {
         return {

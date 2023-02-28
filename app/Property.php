@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Traits\Slugger;
 use Illuminate\Database\Eloquent\Model;
 
 class Property extends Model
 {
+    use Slugger;
+
     public function user()
     {
         return $this->belongsTo('App\user');
@@ -34,5 +37,10 @@ class Property extends Model
     public function messages()
     {
         return $this->hasMany('App\Message');
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }
