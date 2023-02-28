@@ -1,10 +1,12 @@
 <template>
-    <div v-if="property">
-        <h1>{{ property.name }}</h1>
-        <img :src="'/storage/' + objPost.uploaded_img" :alt="objPost.title">
-        <h2>{{ property.address }}</h2>
+    <div v-if="propertyArray">
+        <h1>{{ propertyArray.name }}</h1>
+        <div v-for="images in propertyArray.property_images" :key="images.id">
+            <img :src="'/storage/' + images.image" :alt="images.id">
+        </div>
+        <h2>{{ propertyArray.address }}</h2>
         <p>
-            {{ property.description }}
+            {{ propertyArray.description }}
         </p>
 
     </div>
@@ -13,17 +15,20 @@
 <script>
 // TODO: gestire la 404 dei post non esistenti
 export default {
-    //props: [
-    //    'slug',
-    //],
+    props: [
+       'slug',
+    ],
     data() {
         return {
-            property: null,
+            propertyArray: null,
         }
     },
     created() {
-        axios.get('/api/posts/' + this.slug)
-            .then(response => this.property = response.data.results);
+        axios.get('/api/properties/' + this.slug)
+        .then(response => {
+                this.propertyArray = response.data.results
+                console.log(this.propertyArray);
+            });
     }
 }
 </script>
