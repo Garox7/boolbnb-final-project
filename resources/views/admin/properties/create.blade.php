@@ -96,12 +96,14 @@
         </div>
 
         {{-- FILE IMAGE --}}
+        <div id="image-preview"></div>
         <div id="image-fields">
             <div class="mb-3">
-                <label for="image" class="form-label">Immagine 1</label>
-                <input type="file" class="form-control" id="image" name="image[]" required>
+                <label for="image" class="form-label">Seleziona una o più immagini</label>
+                <input type="file" class="form-control" id="image" name="image[]" multiple>
             </div>
         </div>
+        <button type="button" id="add-image" class="btn btn-secondary mb-3 d-none">Aggiungi immagine</button>
         @if ($errors->has('image') || $errors->has('image.*'))
             <ul>
                 @foreach ($errors->get('image') as $error)
@@ -109,7 +111,6 @@
                 @endforeach
             </ul>
         @endif
-        <button type="button" id="add-image" class="btn btn-secondary mb-3">Aggiungi immagine</button>
 
         {{-- DESCRIPTION --}}
         <div class="mb-3">

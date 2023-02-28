@@ -13,21 +13,32 @@ if (controlBtn && dropMenu) {
 }
 
 // create.blade.php
-const addButton = document.querySelector("#add-image");
-const imageFields = document.querySelector("#image-fields");
+// bottone per aggiunta di ulteriori immagini
+const input = document.querySelector('#image');
+const preview = document.querySelector('#image-preview');
+const addButton = document.querySelector('#add-image');
 
-if (addButton && imageFields) {
-    let count = 1;
+if(input && preview && addButton) {
 
-    addButton.addEventListener("click", function() {
-    const newField = document.createElement("div");
-    newField.innerHTML = `
-        <div class="mb-3">
-        <label for="image" class="form-label">Immagine ${++count}</label>
-        <input type="file" class="form-control" id="image" name="image[]">
-        </div>
-    `;
-    imageFields.appendChild(newField);
+    input.addEventListener('change', function () {
+      preview.innerHTML = ''; // pulisce il contenitore delle anteprime
+      const files = this.files;
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const img = new Image();
+          img.src = e.target.result;
+          preview.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      }
+      addButton.classList.remove('d-none'); // rende visibile il pulsante per aggiungere altre immagini
+      iput
+    });
+
+    addButton.addEventListener('click', function () {
+      input.click(); // simula il click sull'input di file
     });
 }
 
@@ -60,7 +71,3 @@ if (deleteBtn && deletePopup && cancelBtn) {
         setTimeout(hideSuccessMessage, 10000);
     };
 }
-
-
-
-

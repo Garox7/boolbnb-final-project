@@ -10548,14 +10548,29 @@ if (controlBtn && dropMenu) {
 }
 
 // create.blade.php
-var addButton = document.querySelector("#add-image");
-var imageFields = document.querySelector("#image-fields");
-if (addButton && imageFields) {
-  var count = 1;
-  addButton.addEventListener("click", function () {
-    var newField = document.createElement("div");
-    newField.innerHTML = "\n        <div class=\"mb-3\">\n        <label for=\"image\" class=\"form-label\">Immagine ".concat(++count, "</label>\n        <input type=\"file\" class=\"form-control\" id=\"image\" name=\"image[]\">\n        </div>\n    ");
-    imageFields.appendChild(newField);
+// bottone per aggiunta di ulteriori immagini
+var input = document.querySelector('#image');
+var preview = document.querySelector('#image-preview');
+var addButton = document.querySelector('#add-image');
+if (input && preview && addButton) {
+  input.addEventListener('change', function () {
+    preview.innerHTML = ''; // pulisce il contenitore delle anteprime
+    var files = this.files;
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var img = new Image();
+        img.src = e.target.result;
+        preview.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    }
+    addButton.classList.remove('d-none'); // rende visibile il pulsante per aggiungere altre immagini
+    iput;
+  });
+  addButton.addEventListener('click', function () {
+    input.click(); // simula il click sull'input di file
   });
 }
 
