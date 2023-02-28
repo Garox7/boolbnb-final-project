@@ -38,7 +38,7 @@
                         <button type="button" @click="removeOldImage(index)">Rimuovi</button>
                     </div>
 
-                    <div v-show="newPreview && property.imagePreviews.length">
+                    <div v-if="property.imagePreviews > 0">
                         <div v-for="(preview, index) in property.imagePreviews" :key="index">
                             <img :src="preview" class="img-preview">
                             <button type="button" @click="removeImage(index)">Rimuovi</button>
@@ -76,7 +76,6 @@ export default {
                 imagesArray: [],
                 imagePreviews: []
             },
-            newPreview: false,
         }
     },
     created() {
@@ -86,10 +85,11 @@ export default {
                 Authorization: `Bearer ${localStorage.getItem('access_token')}`,
             }
         }).then(response => {
-            console.log(response);
+
+            // console.log(response);
+
             if (response.data.success) {
             const property = response.data.results;
-            console.log(property);
             this.property = {
                 name: property.name,
                 slug: property.slug,
@@ -99,9 +99,7 @@ export default {
                 bathroom_count: property.bathroom_count,
                 bed_count: property.bed_count,
                 imageOldArray: property.property_images,
-                imagePreviews: property.property_images,
             };
-            console.log(this.property.imagePreviews)
             } else {
                 this.is404 = true;
             }
@@ -118,8 +116,10 @@ export default {
             formData.append('bedroom_count', this.property.bedroom_count);
             formData.append('bed_count', this.property.bed_count);
             formData.append('bathroom_count', this.property.bathroom_count);
-            for (let i = 0; i < this.property.imagesArray.length; i++) {
-                formData.append('image[]', this.property.imagesArray[i]);
+            if (this.property,imagesArray.length) {
+                for (let i = 0; i < this.property.imagesArray.length; i++) {
+                    formData.append('image[]', this.property.imagesArray[i]);
+                }
             }
 
             axios.post('/api/properties/' + this.slug, formData, {
@@ -156,7 +156,7 @@ export default {
             this.property.imagePreviews.splice(index, 1);
         },
         addNewImageInput() {
-            this.newPreview = true;
+            console.log()
             const input = document.createElement('input');
             input.type = 'file';
             input.name = 'image[]';
@@ -168,7 +168,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 img {
     width: 100px;
     height: 100px;
