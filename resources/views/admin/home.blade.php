@@ -14,7 +14,10 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{ __('Bentornato!') }}
+                    <div>
+                        <a href="{{ route('admin.properties.index') }}">Accedi alle tue proprietà</a>
+                    </div>
                 </div>
             </div>
         </div>
