@@ -11,5 +11,8 @@
 </head>
 <body>
     <div id="app"></div>
+    <script>
+        window.user = @json(auth()->check());
+    </script>
 </body>
 </html>
