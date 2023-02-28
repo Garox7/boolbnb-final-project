@@ -18,6 +18,16 @@
                     <div>
                         <a href="{{ route('admin.properties.index') }}">Accedi alle tue proprietà</a>
                     </div>
+
+                    <button class="btn btn-danger text-light">
+                        <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                    </button>
                 </div>
             </div>
         </div>
