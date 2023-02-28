@@ -41,7 +41,7 @@
         <p>L'azione è irreversibile</p>
         <div class="button-container">
             <button class="cancel-button">Annulla</button>
-            <form action="{{ route('admin.properties.destroy', ['property' => $property->id]) }}" method="post">
+            <form action="{{ route('admin.properties.destroy', ['property' => $property]) }}" method="post">
                 @csrf
                 @method('DELETE')
                 <button class="confirm-button">Conferma</button>
