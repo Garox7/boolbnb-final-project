@@ -1825,24 +1825,16 @@ __webpack_require__.r(__webpack_exports__);
   name: 'HeaderComponent',
   data: function data() {
     return {
-      isLoggedIn: false,
-      user: null
+      user: window.user,
+      isLoggedIn: null
     };
-  } // TODO: rendere l'header dinamico in base all'autenticazione dell'utente
-  // mounted() {
-  //     axios.get('/api/auth/status')
-  //         .then(response => {
-  //             this.isLoggedIn = response.data.authenticated;
-  //             console.log(response.data.authenticated);
-  //             console.log(this.user)
-  //             if (this.isLoggedIn) {
-  //                 this.user = response.data.user;
-  //             }
-  //         })
-  //         .catch(error => {
-  //             console.error(error);
-  //         })
-  // }
+  },
+  created: function created() {
+    console.log(this.user);
+    if (user) {
+      this.isLoggedIn = true;
+    } else {}
+  }
 });
 
 /***/ }),
@@ -2039,7 +2031,7 @@ var render = function render() {
       d: "M5 8c1.306 0 2.418.835 2.83 2H14v2H7.829A3.001 3.001 0 1 1 5 8zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6-8a3 3 0 1 1-2.829 4H2V4h6.17A3.001 3.001 0 0 1 11 2zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"
     }
   })])])]), _vm._v(" "), _c("nav", {
-    staticClass: "back mobile-nav"
+    staticClass: "mobile-nav"
   }, [_c("div", {
     staticClass: "nav-container"
   }, [_c("a", {

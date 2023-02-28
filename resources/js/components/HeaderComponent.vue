@@ -20,7 +20,7 @@
         </div>
 
         <!-- nav mobile max:744px  -->
-        <nav class="back mobile-nav">
+        <nav class="mobile-nav">
             <!-- bottoni di navigazione -->
             <div class="nav-container">
                 <a href="/" class="nav-button">
@@ -91,26 +91,16 @@ export default {
     name: 'HeaderComponent',
     data() {
         return {
-            isLoggedIn: false,
-            user: null,
-        }
+            user: window.user,
+            isLoggedIn: null,
+        };
     },
-
-    // TODO: rendere l'header dinamico in base all'autenticazione dell'utente
-    // mounted() {
-    //     axios.get('/api/auth/status')
-    //         .then(response => {
-    //             this.isLoggedIn = response.data.authenticated;
-    //             console.log(response.data.authenticated);
-    //             console.log(this.user)
-    //             if (this.isLoggedIn) {
-    //                 this.user = response.data.user;
-    //             }
-    //         })
-    //         .catch(error => {
-    //             console.error(error);
-    //         })
-    // }
+    created() {
+        console.log(this.user);
+        if (user) {
+            this.isLoggedIn = true
+        } else {}
+    }
 };
 </script>
 
