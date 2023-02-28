@@ -19,6 +19,20 @@
                 @enderror
             </div>
         </div>
+        {{-- SLUG --}}
+        <div class="mb-3">
+            <label for="slug" class="form-label">Slug</label>
+            <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" value="{{ old('slug') }}">
+            <div class="invalid-feedback">
+                @error('slug')
+                    <ul>
+                        @foreach ($errors->get('slug') as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                @enderror
+            </div>
+        </div>
 
         {{-- ADDRESS --}}
         <div class="mb-3">
