@@ -115,7 +115,17 @@ class PropertyController extends Controller
      */
     public function edit(Property $property)
     {
-        return view('admin.properties.edit', compact('property'));
+        $services = Service::all();
+        // $allservices = Service::all()->toArray();
+        // $ownservices = $property->services()->get();
+        // $ownservicesArray = $ownservices->toArray();
+
+        return view('admin.properties.edit', [
+            'property' => $property,
+            'services' => $services,
+            // 'allserveces' => $allservices,
+            // 'ownservicesArray' => $ownservicesArray,
+        ]);
     }
 
     /**
@@ -147,6 +157,12 @@ class PropertyController extends Controller
         $property->bed_count = $data['bed_count'];
         $property->bathroom_count = $data['bathroom_count'];
         $property->update();
+
+        if (array_key_exists('services', $data)) {
+            $property->services()->sync($data['services']);
+        } else {
+            $property->services()->detach();
+        }
 
         // redirezionamento
         return redirect()
