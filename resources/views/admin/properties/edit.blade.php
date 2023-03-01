@@ -96,11 +96,14 @@
             </div>
         </div>
 
-        {{--Service--}}
+        {{--Services--}}
 
         @foreach($services as $service)
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="{{$service->id}}" id="service{{$service->id}}" name="services[]">
+                <input class="form-check-input" type="checkbox" value="{{$service->id}}" id="service{{$service->id}}" name="services[]"
+                    @if ($service->properties->contains($property->id))
+                        checked
+                    @endif>
                 <label class="form-check-label" for="service{{$service->id}}">{{$service->name}}</label>
             </div>
         @endforeach
