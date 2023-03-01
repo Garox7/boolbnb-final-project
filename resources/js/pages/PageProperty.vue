@@ -8,7 +8,11 @@
         <p>
             {{ propertyArray.description }}
         </p>
-
+        <ul>
+            <li>numero letti {{ propertyArray.bed_count }}</li>
+            <li>numero stanze da letto {{ propertyArray.bedroom_count }}</li>
+            <li>numero bagni {{ propertyArray.bathroom_count }}</li>
+        </ul>
     </div>
 </template>
 

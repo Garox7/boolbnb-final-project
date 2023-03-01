@@ -7,6 +7,7 @@ use App\Property;
 use App\PropertyImages;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Service;
 
 class PropertyController extends Controller
 {
@@ -33,8 +34,14 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        return view('admin.properties.create');
+        $services = Service::all();
+        return view('admin.properties.create', compact('services'));
     }
+
+    //public function create()
+    //{
+    //    return view('admin.properties.create');
+    //}
 
     /**
      * Store a newly created resource in storage.
@@ -66,6 +73,7 @@ class PropertyController extends Controller
         $property->bedroom_count = $data['bedroom_count'];
         $property->bed_count = $data['bed_count'];
         $property->bathroom_count = $data['bathroom_count'];
+        $property->slug = $data['name'];
         $property->save();
 
         // Controllo e salvataggio immagini
@@ -157,4 +165,5 @@ class PropertyController extends Controller
         $property->delete();
         return redirect()->route('admin.properties.index')->with('success_delete', $property);
     }
+
 }
