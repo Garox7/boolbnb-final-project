@@ -101,7 +101,11 @@ class PropertyController extends Controller
      */
     public function show(Property $property)
     {
-        return view('admin.properties.show', compact('property'));
+        $services = $property->services();
+        return view('admin.properties.show', [
+            'property' => $property,
+            'services' => $services,
+        ]);
     }
 
     /**
