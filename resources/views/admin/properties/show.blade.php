@@ -43,6 +43,15 @@
             <li>numero bagni {{ $property->bathroom_count }}</li>
         </ul>
         <p>{{ $property->user->first_name}}</p>
-        
+
+        @if(count($property->services) > 0)
+            <p>Servizi offerti:</p>
+        @endif
+
+        <ul>
+            @foreach ($property->services as $service)
+            <li>{{ $service->name }}</li>
+            @endforeach
+        </ul>
     </div>
 @endsection
