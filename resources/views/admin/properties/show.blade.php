@@ -35,7 +35,14 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-
+        <p>{{ $property->address}}</p>
         <p class="card-text">{{$property->description}}</p>
+        <ul>
+            <li>numero letti {{ $property->bed_count }}</li>
+            <li>numero stanze da letto {{ $property->bedroom_count }}</li>
+            <li>numero bagni {{ $property->bathroom_count }}</li>
+        </ul>
+        <p>{{ $property->user->first_name}}</p>
+        
     </div>
 @endsection

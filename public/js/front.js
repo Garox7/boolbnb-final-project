@@ -2335,7 +2335,7 @@ var render = function render() {
     });
   }), 0)], 2), _vm._v(" "), _c("div", {
     staticClass: "property-details"
-  }, [_c("span", [_vm._v(_vm._s(_vm.address))]), _vm._v(" "), _c("span", [_vm._v(_vm._s(_vm.bed))]), _vm._v(" "), _c("span", [_vm._v(_vm._s(_vm.bathroom))])])], 1);
+  }, [_c("span", [_vm._v(_vm._s(_vm.address))]), _vm._v(" "), _c("span", [_vm._v(_vm._s(_vm.services))]), _vm._v(" "), _c("span", [_vm._v(_vm._s(_vm.bed))]), _vm._v(" "), _c("span", [_vm._v(_vm._s(_vm.bathroom))])])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -2404,7 +2404,7 @@ var render = function render() {
         alt: images.id
       }
     })]);
-  }), _vm._v(" "), _c("h2", [_vm._v(_vm._s(_vm.propertyArray.address))]), _vm._v(" "), _c("p", [_vm._v("\n        " + _vm._s(_vm.propertyArray.description) + "\n    ")])], 2) : _vm._e();
+  }), _vm._v(" "), _c("h2", [_vm._v(_vm._s(_vm.propertyArray.address))]), _vm._v(" "), _c("p", [_vm._v("\n        " + _vm._s(_vm.propertyArray.description) + "\n    ")]), _vm._v(" "), _c("ul", [_c("li", [_vm._v("numero letti " + _vm._s(_vm.propertyArray.bed_count))]), _vm._v(" "), _c("li", [_vm._v("numero stanze da letto " + _vm._s(_vm.propertyArray.bedroom_count))]), _vm._v(" "), _c("li", [_vm._v("numero bagni " + _vm._s(_vm.propertyArray.bathroom_count))])])], 2) : _vm._e();
 };
 var staticRenderFns = [];
 render._withStripped = true;

@@ -20,7 +20,7 @@
             </div>
         </div>
         {{-- SLUG --}}
-        <div class="mb-3">
+        {{--<div class="mb-3">
             <label for="slug" class="form-label">Slug</label>
             <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" value="{{ old('slug') }}">
             <div class="invalid-feedback">
@@ -32,7 +32,7 @@
                     </ul>
                 @enderror
             </div>
-        </div>
+        </div>--}}
 
         {{-- ADDRESS --}}
         <div class="mb-3">
@@ -109,6 +109,17 @@
             </div>
         </div>
 
+        {{-- SERVICE --}}
+        @foreach($services as $service)
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="{{$service->id}}" id="service{{$service->id}}" name="services[]">
+                <label class="form-check-label" for="service{{$service->id}}">{{$service->name}}</label>
+            </div>
+        @endforeach
+        
+
+        
+
         {{-- FILE IMAGE --}}
         <div id="image-preview"></div>
         <div id="image-fields">
@@ -117,7 +128,7 @@
                 <input type="file" class="form-control" id="image" name="image[]" multiple>
             </div>
         </div>
-        <button type="button" id="add-image" class="btn btn-secondary mb-3 d-none">Aggiungi immagine</button>
+        {{--<button type="button" id="add-image" class="btn btn-secondary mb-3 d-none">Aggiungi immagine</button>--}}
         @if ($errors->has('image') || $errors->has('image.*'))
             <ul>
                 @foreach ($errors->get('image') as $error)
