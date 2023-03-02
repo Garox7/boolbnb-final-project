@@ -2192,7 +2192,7 @@ var render = function render() {
     staticClass: "logo-text"
   }, [_vm._v("Boolbnb")])])]), _vm._v(" "), _c("div", {
     staticClass: "user-controls"
-  }, [_c("span", [_vm._v("Affitta con Boolbnb")]), _vm._v(" "), _c("div", {
+  }, [_c("div", {
     staticClass: "controls"
   }, [_c("div", {
     staticClass: "control-icon"
@@ -2232,6 +2232,10 @@ var render = function render() {
     }
   })])])]), _vm._v(" "), _c("div", {
     staticClass: "user-icon"
+  }, [_c("a", {
+    attrs: {
+      href: "http://127.0.0.1:8000/admin"
+    }
   }, [_c("svg", {
     staticStyle: {
       display: "block",
@@ -2250,7 +2254,7 @@ var render = function render() {
     attrs: {
       d: "m16 1c8.2842712 0 15 6.71572875 15 15 0 8.2842712-6.7157288 15-15 15-8.28427125 0-15-6.7157288-15-15 0-8.28427125 6.71572875-15 15-15zm0 8c-2.7614237 0-5 2.2385763-5 5 0 2.0143973 1.2022141 3.7998876 2.9996346 4.5835001l.0003231 2.0984999-.1499943.0278452c-2.8326474.5613112-5.31897338 2.2230336-6.93575953 4.5872979 2.34343054 2.291067 5.54974273 3.7028569 9.08579613 3.7028569 3.5355506 0 6.7414538-1.4113884 9.0850203-3.701476-1.6141801-2.3628535-4.0978119-4.0247647-6.929184-4.5867938l-.1558786-.0287302.001228-2.0991413c1.7288399-.7547474 2.9066959-2.4357565 2.9936498-4.355479l.0051645-.2283797c0-2.7614237-2.2385763-5-5-5zm0-6c-7.17970175 0-13 5.82029825-13 13 0 2.9045768.95257276 5.5866683 2.56235849 7.7509147 1.42074739-1.9134907 3.33951478-3.4002416 5.53860831-4.2955956l.3480332-.1363191-.0229565-.0189706c-1.43704227-1.2411241-2.34462949-3.045583-2.42083359-5.0285539l-.00520991-.2714755c0-3.8659932 3.1340068-7 7-7s7 3.1340068 7 7c0 1.9941317-.8415062 3.8279876-2.224566 5.1193683l-.225434.2006317.0447787.0163138c2.3268368.8792152 4.3570558 2.4138611 5.8430586 4.4127726 1.6098837-2.1632453 2.5621627-4.8449575 2.5621627-7.7490864 0-7.17970175-5.8202983-13-13-13z"
     }
-  })])])])])])]);
+  })])])])])])])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -2395,7 +2399,9 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _vm.propertyArray ? _c("div", [_c("h1", [_vm._v(_vm._s(_vm.propertyArray.name))]), _vm._v(" "), _vm._l(_vm.propertyArray.property_images, function (images) {
+  return _vm.propertyArray ? _c("div", [_c("h1", [_vm._v(_vm._s(_vm.propertyArray.name))]), _vm._v(" "), _c("div", {
+    staticClass: "cont-img"
+  }, _vm._l(_vm.propertyArray.property_images, function (images) {
     return _c("div", {
       key: images.id
     }, [_c("img", {
@@ -2404,7 +2410,7 @@ var render = function render() {
         alt: images.id
       }
     })]);
-  }), _vm._v(" "), _c("h2", [_vm._v(_vm._s(_vm.propertyArray.address))]), _vm._v(" "), _c("p", [_vm._v("\n        DESCRIZIONE:" + _vm._s(_vm.propertyArray.description) + "\n    ")]), _vm._v(" "), _c("div", [_c("p", [_vm._v("NUMERO LETTI: " + _vm._s(_vm.propertyArray.bed_count))]), _vm._v(" "), _c("p", [_vm._v("NUMERO STANZE DA LETTO: " + _vm._s(_vm.propertyArray.bedroom_count))]), _vm._v(" "), _c("p", [_vm._v("NUMERO BAGNI: " + _vm._s(_vm.propertyArray.bathroom_count))])])], 2) : _vm._e();
+  }), 0), _vm._v(" "), _c("h2", [_vm._v(_vm._s(_vm.propertyArray.address))]), _vm._v(" "), _c("p", [_vm._v("\n        DESCRIZIONE:" + _vm._s(_vm.propertyArray.description) + "\n    ")]), _vm._v(" "), _c("div", [_c("p", [_vm._v("NUMERO LETTI: " + _vm._s(_vm.propertyArray.bed_count))]), _vm._v(" "), _c("p", [_vm._v("NUMERO STANZE DA LETTO: " + _vm._s(_vm.propertyArray.bedroom_count))]), _vm._v(" "), _c("p", [_vm._v("NUMERO BAGNI: " + _vm._s(_vm.propertyArray.bathroom_count))])])]) : _vm._e();
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -2571,7 +2577,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".tag[data-v-64faed8d] {\n  display: inline-block;\n  margin: 0.3em;\n  padding: 0.4em 0.6em;\n  border-radius: 10em;\n  background-color: red;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".tag[data-v-64faed8d] {\n  display: inline-block;\n  margin: 0.3em;\n  padding: 0.4em 0.6em;\n  border-radius: 10em;\n  background-color: red;\n}\n.cont-img[data-v-64faed8d] {\n  display: flex;\n  gap: 15px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

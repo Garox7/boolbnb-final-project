@@ -1,11 +1,11 @@
 <template>
     <div v-if="propertyArray">
         <h1>{{ propertyArray.name }}</h1>
-        <div v-for="images in propertyArray.property_images" :key="images.id">
-            <img :src="'/storage/' + images.image" :alt="images.id">
-        </div>
-
-
+                <div class="cont-img">
+                    <div v-for="images in propertyArray.property_images" :key="images.id" >
+                        <img :src="'/storage/' + images.image" :alt="images.id">
+                    </div>
+                 </div>
         <h2>{{ propertyArray.address }}</h2>
         <p>
             DESCRIZIONE:{{ propertyArray.description }}
@@ -14,6 +14,7 @@
             <p>NUMERO LETTI: {{ propertyArray.bed_count }}</p>
             <p>NUMERO STANZE DA LETTO: {{ propertyArray.bedroom_count }}</p>
             <p>NUMERO BAGNI: {{ propertyArray.bathroom_count }}</p>
+            
         </div>
     </div>
 </template>
@@ -41,11 +42,15 @@ export default {
 
 <style lang="scss" scoped>
     .tag {
-
         display: inline-block;
         margin: .3em;
         padding: .4em .6em;
         border-radius: 10em;
         background-color: red;
     }
+    .cont-img{
+        display: flex;
+        gap: 15px;
+    }
+    
 </style>
