@@ -4,15 +4,17 @@
         <div v-for="images in propertyArray.property_images" :key="images.id">
             <img :src="'/storage/' + images.image" :alt="images.id">
         </div>
+
+
         <h2>{{ propertyArray.address }}</h2>
         <p>
-            {{ propertyArray.description }}
+            DESCRIZIONE:{{ propertyArray.description }}
         </p>
-        <ul>
-            <li>numero letti {{ propertyArray.bed_count }}</li>
-            <li>numero stanze da letto {{ propertyArray.bedroom_count }}</li>
-            <li>numero bagni {{ propertyArray.bathroom_count }}</li>
-        </ul>
+        <div>
+            <p>NUMERO LETTI: {{ propertyArray.bed_count }}</p>
+            <p>NUMERO STANZE DA LETTO: {{ propertyArray.bedroom_count }}</p>
+            <p>NUMERO BAGNI: {{ propertyArray.bathroom_count }}</p>
+        </div>
     </div>
 </template>
 

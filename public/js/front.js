@@ -2404,7 +2404,7 @@ var render = function render() {
         alt: images.id
       }
     })]);
-  }), _vm._v(" "), _c("h2", [_vm._v(_vm._s(_vm.propertyArray.address))]), _vm._v(" "), _c("p", [_vm._v("\n        " + _vm._s(_vm.propertyArray.description) + "\n    ")]), _vm._v(" "), _c("ul", [_c("li", [_vm._v("numero letti " + _vm._s(_vm.propertyArray.bed_count))]), _vm._v(" "), _c("li", [_vm._v("numero stanze da letto " + _vm._s(_vm.propertyArray.bedroom_count))]), _vm._v(" "), _c("li", [_vm._v("numero bagni " + _vm._s(_vm.propertyArray.bathroom_count))])])], 2) : _vm._e();
+  }), _vm._v(" "), _c("h2", [_vm._v(_vm._s(_vm.propertyArray.address))]), _vm._v(" "), _c("p", [_vm._v("\n        DESCRIZIONE:" + _vm._s(_vm.propertyArray.description) + "\n    ")]), _vm._v(" "), _c("div", [_c("p", [_vm._v("NUMERO LETTI: " + _vm._s(_vm.propertyArray.bed_count))]), _vm._v(" "), _c("p", [_vm._v("NUMERO STANZE DA LETTO: " + _vm._s(_vm.propertyArray.bedroom_count))]), _vm._v(" "), _c("p", [_vm._v("NUMERO BAGNI: " + _vm._s(_vm.propertyArray.bathroom_count))])])], 2) : _vm._e();
 };
 var staticRenderFns = [];
 render._withStripped = true;

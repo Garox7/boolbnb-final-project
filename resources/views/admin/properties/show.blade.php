@@ -16,12 +16,12 @@
     @endif
 
     <div class="container">
-        <h1 class="mb-4">{{$property->name}}</h1>
+        <h1 class="mb-4">{{strtoupper($property->name)}}</h1>
 
         <div id="carouselExampleControls" class="carousel slide mb-4" data-bs-ride="carousel">
             <div class="carousel-inner">
                 @foreach ($property->property_images as $key => $image)
-                    <div class="carousel-item {{ $key == 0 ? 'active' : '' }}" style="max-height: 600px;">
+                    <div class="carousel-item {{ $key == 0 ? 'active' : '' }}" style="max-height: 500px;">
                         <img src="{{ asset('storage/' . $image->image) }}" class="d-block w-100" style="object-fit: cover; width: 100%;" alt="{{ $property->name }}">
                     </div>
                 @endforeach
@@ -35,26 +35,25 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-        <p>{{ $property->address}}</p>
-        <p class="card-text">{{$property->description}}</p>
-        <ul>
-            <li>numero letti {{ $property->bed_count }}</li>
-            <li>numero stanze da letto {{ $property->bedroom_count }}</li>
-            <li>numero bagni {{ $property->bathroom_count }}</li>
-        </ul>
-        <p>user name del prorpietario{{ $property->user->first_name}}</p>
-        
+        <h1>{{ $property->address}}</h1>
+        <p> <span class="strong">DESCRIZIONE:</span>  {{$property->description}}</p>
+        <div class="info">
+            <div>NUMERO LETTI: {{ $property->bed_count }}</div>
+            <div>NUMERO STANZE DA LETTO: {{ $property->bedroom_count }}</div>
+            <div>NUMERO BAGNI: {{ $property->bathroom_count }}</div>
+        </div>
 
-        <p>{{ $property->user->first_name}}</p>
 
-        @if(count($property->services) > 0)
-            <p>Servizi offerti:</p>
-        @endif
-
-        <ul>
+        <ul class="list-group">
+            @if(count($property->services) > 0)
+            <li class="list-group-item">SERVIZI OFFERTI:</li>
+            @endif
             @foreach ($property->services as $service)
-            <li>{{ $service->name }}</li>
+            <li class="list-group-item">{{ $service->name }}</li>
             @endforeach
         </ul>
+        <div>PROPRIETARIO: {{ $property->user->first_name}}</div>
+
     </div>
+
 @endsection
