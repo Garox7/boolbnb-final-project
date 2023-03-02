@@ -10575,26 +10575,27 @@ if (input && preview && addButton) {
 }
 
 // index.blade.php
-var deleteBtn = document.querySelectorAll('.delete-button');
 var deletePopup = document.querySelector('.delete-popup-backdrop');
-var cancelBtn = document.querySelector('.cancel-button');
-var deleteSuccess = document.querySelector('.alert-danger');
-if (deleteBtn && deletePopup && cancelBtn) {
+if (deletePopup) {
   var hideSuccessMessage = function hideSuccessMessage() {
     deleteSuccess.classList.add('d-none');
   };
-  deleteBtn.forEach(function (element) {
-    element.addEventListener('click', function () {
+  var deleteBtn = document.querySelectorAll('.delete-button');
+  deleteBtn.forEach(function (button) {
+    button.addEventListener('click', function () {
       console.log('cliccato');
       deletePopup.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
+      deletePopup.querySelector('form').setAttribute('action', 'http://localhost:8000/admin/properties/' + this.dataset.id);
     });
   });
+  var cancelBtn = document.querySelector('.cancel-button');
   cancelBtn.addEventListener('click', function () {
     deletePopup.classList.add('hidden');
     document.body.style.overflow = 'visible';
   });
   ;
+  var deleteSuccess = document.querySelector('.alert-danger');
   if (document.body.contains(deleteSuccess)) {
     setTimeout(hideSuccessMessage, 10000);
   }
