@@ -1,9 +1,14 @@
 <template>
     <div>
-        <HeaderComponent />
+        <HeaderComponent
+            @searchProperty="getProperty"
+        />
 
         <div class="main">
-            <router-view />
+            <router-view
+                :serchString="serchString"
+                :searchMode="searchMode"
+            />
         </div>
 
         <!-- footer -->
@@ -17,6 +22,22 @@ export default {
     name: 'App',
     components: {
         HeaderComponent,
+    },
+    data() {
+        return {
+            serchString: '',
+            searchMode: false,
+        }
+    },
+    methods: {
+        getProperty(data) {
+            this.serchString = data;
+            if (this.serchString != '') {
+                this.searchMode = true;
+            } else {
+                this.searchMode = false;
+            }
+        }
     }
 }
 </script>

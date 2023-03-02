@@ -23,12 +23,13 @@ class PropertyController extends Controller
             'results' => $properties,
         ]);
     }
+
     public function show($property)
     {
         $properties = Property::where('slug', $property)
         ->with([
                 'property_images' => function ($query) {
-                    $query->select('id', 'property_id', 'image',);
+                    $query->select('id', 'property_id', 'image');
                 },
             ])
             ->first();
@@ -36,6 +37,21 @@ class PropertyController extends Controller
             'success' => true,
             'results' => $properties,
         ]);
+    }
+
+    public function search($searchString)
+    {
+        $properties = Property::where('address', 'ILIKE', '%' . $searchString . '%')
+            ->with([
+                'property_images' => function ($query) {
+                    $query->select('id', 'propery_id', 'image');
+                },
+            ])
+            ->get();
+            return response()->json([
+                'success' => true,
+                'results' => $properties,
+            ]);
     }
 
 }
