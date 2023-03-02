@@ -1,5 +1,5 @@
 <template>
-    <div class="property-container">
+    <div v-if="!searchMode" class="property-container">
         <PropertyCardComponent class="card-container"
             v-for="property in arrProperties"
             :key="property.id"
@@ -10,14 +10,25 @@
             :slug="property.slug"
         />
     </div>
+    <div v-else>
+        <SearchSection
+            :serchString="serchString"
+        />
+    </div>
 </template>
 
 <script>
 import PropertyCardComponent from '../components/PropertyCardComponent';
+import SearchSection from '../components/SearchSection.vue';
 
 export default {
+    props: {
+        searchMode: Boolean,
+        serchString: String
+    },
     components: {
         PropertyCardComponent,
+        SearchSection
     },
     data() {
         return {
