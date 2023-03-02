@@ -42,6 +42,9 @@
             <li>numero stanze da letto {{ $property->bedroom_count }}</li>
             <li>numero bagni {{ $property->bathroom_count }}</li>
         </ul>
+        <p>user name del prorpietario{{ $property->user->first_name}}</p>
+        
+
         <p>{{ $property->user->first_name}}</p>
 
         @if(count($property->services) > 0)

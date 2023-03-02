@@ -109,6 +109,7 @@
         @endforeach
 
         {{-- FILE IMAGE --}}
+        {{--
         <div id="image-fields">
             <div class="mb-3">
                 @foreach($property->property_images as $image)
@@ -126,7 +127,7 @@
                 @endforeach
             </ul>
         @endif
-        <button type="button" id="add-image" class="btn btn-secondary mb-3">Aggiungi immagine</button>
+        <button type="button" id="add-image" class="btn btn-secondary mb-3">Aggiungi immagine</button> --}}
 
         {{-- DESCRIPTION --}}
         <div class="mb-3">
