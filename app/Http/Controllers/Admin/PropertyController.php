@@ -76,6 +76,9 @@ class PropertyController extends Controller
         $property->slug = $data['name'];
         $property->save();
 
+        if (array_key_exists('services', $data)) {
+            $property->services()->attach($data['services']);
+        }
         // Controllo e salvataggio immagini
         if ($request->hasFile('image')) {
             foreach ($request->file('image') as $image) {
@@ -102,10 +105,7 @@ class PropertyController extends Controller
     public function show(Property $property)
     {
         $services = $property->services();
-        return view('admin.properties.show', [
-            'property' => $property,
-            'services' => $services,
-        ]);
+        return view('admin.properties.show', compact('property'));
     }
 
     /**
@@ -116,7 +116,12 @@ class PropertyController extends Controller
      */
     public function edit(Property $property)
     {
-        return view('admin.properties.edit', compact('property'));
+        $services = Service::all();
+
+        return view('admin.properties.edit', [
+            'property' => $property,
+            'services' => $services,
+            ]);
     }
 
     /**
@@ -148,6 +153,12 @@ class PropertyController extends Controller
         $property->bed_count = $data['bed_count'];
         $property->bathroom_count = $data['bathroom_count'];
         $property->update();
+
+        if (array_key_exists('services', $data)) {
+            $property->services()->sync($data['services']);
+        } else {
+            $property->services()->detach();
+        }
 
         // redirezionamento
         return redirect()
