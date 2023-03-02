@@ -23,9 +23,10 @@ class PropertyController extends Controller
             'results' => $properties,
         ]);
     }
-    public function show()
+    public function show($property)
     {
-        $properties = Property::with([
+        $properties = Property::where('slug', $property)
+        ->with([
                 'property_images' => function ($query) {
                     $query->select('id', 'property_id', 'image',);
                 },
