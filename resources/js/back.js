@@ -43,21 +43,22 @@ if(input && preview && addButton) {
 }
 
 // index.blade.php
-const deleteBtn = document.querySelectorAll('.delete-button');
 const deletePopup = document.querySelector('.delete-popup-backdrop');
-const cancelBtn = document.querySelector('.cancel-button');
-const deleteSuccess = document.querySelector('.alert-danger');
 
-if (deleteBtn && deletePopup && cancelBtn) {
-    deleteBtn.forEach(element => {
-        element.addEventListener('click', function() {
+if (deletePopup) {
+    const deleteBtn = document.querySelectorAll('.delete-button');
+    deleteBtn.forEach(button => {
+        button.addEventListener('click', function() {
             console.log('cliccato');
             deletePopup.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
 
+            deletePopup.querySelector('form').setAttribute('action', 'http://localhost:8000/admin/properties/' + this.dataset.id);
+
         });
     });
 
+    const cancelBtn = document.querySelector('.cancel-button');
     cancelBtn.addEventListener('click', function() {
         deletePopup.classList.add('hidden');
         document.body.style.overflow = 'visible';
@@ -67,6 +68,7 @@ if (deleteBtn && deletePopup && cancelBtn) {
         deleteSuccess.classList.add('d-none');
     };
 
+    const deleteSuccess = document.querySelector('.alert-danger');
     if(document.body.contains(deleteSuccess)) {
         setTimeout(hideSuccessMessage, 10000);
     };

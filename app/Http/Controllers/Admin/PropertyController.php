@@ -180,5 +180,4 @@ class PropertyController extends Controller
         $property->delete();
         return redirect()->route('admin.properties.index')->with('success_delete', $property);
     }
-
 }

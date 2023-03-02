@@ -21,6 +21,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/properties', 'Api\PropertyController@index')->name('property.index');
 Route::get('/properties/{property}', 'Api\PropertyController@show')->name('property.show');
 
-// Rotta API per definire l'auth dell'utente
-Route::get('/auth/status', 'Api\AuthController@getAuthStatus');
+
 
