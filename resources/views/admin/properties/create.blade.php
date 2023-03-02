@@ -112,7 +112,7 @@
         {{-- SERVICE --}}
         @foreach($services as $service)
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="{{$service->id}}" id="service{{$service->id}}" name="{{$service->name}}">
+                <input class="form-check-input" type="checkbox" value="{{$service->id}}" id="service{{$service->id}}" name="services[]">
                 <label class="form-check-label" for="service{{$service->id}}">{{$service->name}}</label>
             </div>
         @endforeach

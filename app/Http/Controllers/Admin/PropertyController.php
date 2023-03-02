@@ -76,8 +76,9 @@ class PropertyController extends Controller
         $property->slug = $data['name'];
         $property->save();
 
-        $property->services()->attach($data['services']);
-
+        if (array_key_exists('services', $data)) {
+            $property->services()->attach($data['services']);
+        }
         // Controllo e salvataggio immagini
         if ($request->hasFile('image')) {
             foreach ($request->file('image') as $image) {
