@@ -102,9 +102,9 @@
                 <label class="form-check-label" for="service{{$service->id}}">{{$service->name}}</label>
             </div>
         @endforeach
-        
 
-        
+
+
 
         {{-- FILE IMAGE --}}
         <div id="image-preview"></div>

@@ -96,7 +96,20 @@
             </div>
         </div>
 
+        {{--Services--}}
+
+        @foreach($services as $service)
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="{{$service->id}}" id="service{{$service->id}}" name="services[]"
+                    @if ($service->properties->contains($property->id))
+                        checked
+                    @endif>
+                <label class="form-check-label" for="service{{$service->id}}">{{$service->name}}</label>
+            </div>
+        @endforeach
+
         {{-- FILE IMAGE --}}
+        {{--
         <div id="image-fields">
             <div class="mb-3">
                 @foreach($property->property_images as $image)
@@ -114,7 +127,7 @@
                 @endforeach
             </ul>
         @endif
-        <button type="button" id="add-image" class="btn btn-secondary mb-3">Aggiungi immagine</button>
+        <button type="button" id="add-image" class="btn btn-secondary mb-3">Aggiungi immagine</button> --}}
 
         {{-- DESCRIPTION --}}
         <div class="mb-3">

@@ -44,5 +44,17 @@
         </ul>
         <p>user name del prorpietario{{ $property->user->first_name}}</p>
         
+
+        <p>{{ $property->user->first_name}}</p>
+
+        @if(count($property->services) > 0)
+            <p>Servizi offerti:</p>
+        @endif
+
+        <ul>
+            @foreach ($property->services as $service)
+            <li>{{ $service->name }}</li>
+            @endforeach
+        </ul>
     </div>
 @endsection
