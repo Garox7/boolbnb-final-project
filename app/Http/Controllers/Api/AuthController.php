@@ -8,38 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function getAuthStatus()
+    public function logout()
     {
-        $authenticated = Auth::check();
-        $user = null;
-        if ($authenticated) {
-            $user = Auth::user();
-        }
-        return response()->json([
-            'authenticated' => $authenticated,
-            'user' => $user
-        ]);
+        Auth::logout();
     }
 }
-
-// $authenticated = Auth::check();
-//         $user = null;
-//         if ($authenticated) {
-//             $user = Auth::user();
-//         }
-//         return response()->json([
-//             'authenticated' => $authenticated,
-//             'user' => $user
-//         ]);
-
-// if (Auth::check()) {
-//     $user = Auth::user();
-//     return response()->json([
-//         'authenticated' => true,
-//         'user' => $user
-//     ]);
-// } else {
-//     return response()->json([
-//         'authenticated' => false
-//     ]);
-// }
