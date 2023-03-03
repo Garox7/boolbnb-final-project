@@ -39,12 +39,14 @@ class PropertyController extends Controller
         ]);
     }
 
-    public function search($searchString)
+    public function search(Request $request)
     {
-        $properties = Property::where('address', 'ILIKE', '%' . $searchString . '%')
+        $searchString = $request->input('address');
+
+        $properties = Property::where('address', 'like', '%' . $searchString . '%')
             ->with([
                 'property_images' => function ($query) {
-                    $query->select('id', 'propery_id', 'image');
+                    $query->select('id', 'property_id', 'image');
                 },
             ])
             ->get();

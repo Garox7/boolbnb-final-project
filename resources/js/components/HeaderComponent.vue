@@ -80,7 +80,7 @@
                 </span>
 
                 <span class="search-input">
-                    <input type="search" name="search" id="search" placeholder="Dove vuoi andare?" v-model="searchInput" @keyup.enter="$emit('searchProperty', searchInput)">
+                    <input type="search" name="search" id="search" placeholder="Dove vuoi andare?" v-model="searchAddress" @input="$emit('searchProperty', searchAddress)">
                 </span>
 
                 <span class="search-filter">
@@ -115,12 +115,11 @@ export default {
         return {
             user: window.user,
             isLoggedIn: null,
-            searchInput: '',
+            searchAddress: '',
         };
     },
     created() {
-        console.log(this.user);
-        if (user) {
+        if (user) { // è possibile togliere questo controllo e utilizzare solo this.user
             this.isLoggedIn = true
         } else {}
     }

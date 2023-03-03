@@ -1808,14 +1808,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      serchString: '',
+      searchAddress: '',
       searchMode: false
     };
   },
   methods: {
-    getProperty: function getProperty(data) {
-      this.serchString = data;
-      if (this.serchString != '') {
+    getSearchString: function getSearchString(inputAddress) {
+      this.searchAddress = inputAddress;
+      if (this.searchAddress != '') {
         this.searchMode = true;
       } else {
         this.searchMode = false;
@@ -1843,12 +1843,12 @@ __webpack_require__.r(__webpack_exports__);
     return {
       user: window.user,
       isLoggedIn: null,
-      searchInput: ''
+      searchAddress: ''
     };
   },
   created: function created() {
-    console.log(this.user);
     if (user) {
+      // è possibile togliere questo controllo e utilizzare solo this.user
       this.isLoggedIn = true;
     } else {}
   }
@@ -1912,11 +1912,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    serchString: String
+    searchAddress: String
   },
-  created: {
-    getProperty: function getProperty() {
-      // richiesta axios
+  data: function data() {
+    return {
+      properties: null
+    };
+  },
+  watch: {
+    searchAddress: function searchAddress(newVal, oldVal) {
+      if (newVal.length > 4) {
+        this.searchProperties();
+      }
+    }
+  },
+  methods: {
+    searchProperties: function searchProperties() {
+      var _this = this;
+      axios.post('/api/properties/search', {
+        address: this.searchAddress
+      }).then(function (response) {
+        _this.properties = response.data.results;
+        console.log(_this.properties);
+      })["catch"](function (error) {
+        console.log(error.response.data);
+      });
     }
   }
 });
@@ -1941,7 +1961,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     searchMode: Boolean,
-    serchString: String
+    searchAddress: String
   },
   components: {
     PropertyCardComponent: _components_PropertyCardComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -2010,13 +2030,13 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", [_c("HeaderComponent", {
     on: {
-      searchProperty: _vm.getProperty
+      searchProperty: _vm.getSearchString
     }
   }), _vm._v(" "), _c("div", {
     staticClass: "main"
   }, [_c("router-view", {
     attrs: {
-      serchString: _vm.serchString,
+      searchAddress: _vm.searchAddress,
       searchMode: _vm.searchMode
     }
   })], 1)], 1);
@@ -2279,8 +2299,8 @@ var render = function render() {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.searchInput,
-      expression: "searchInput"
+      value: _vm.searchAddress,
+      expression: "searchAddress"
     }],
     attrs: {
       type: "search",
@@ -2289,17 +2309,15 @@ var render = function render() {
       placeholder: "Dove vuoi andare?"
     },
     domProps: {
-      value: _vm.searchInput
+      value: _vm.searchAddress
     },
     on: {
-      keyup: function keyup($event) {
-        if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-        return _vm.$emit("searchProperty", _vm.searchInput);
-      },
-      input: function input($event) {
+      input: [function ($event) {
         if ($event.target.composing) return;
-        _vm.searchInput = $event.target.value;
-      }
+        _vm.searchAddress = $event.target.value;
+      }, function ($event) {
+        return _vm.$emit("searchProperty", _vm.searchAddress);
+      }]
     }
   })]), _vm._v(" "), _c("span", {
     staticClass: "search-filter"
@@ -2493,7 +2511,11 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("h1", [_vm._v("Sto Cercando")]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.serchString))])]);
+  return _c("div", [_c("h1", [_vm._v("Sto Cercando")]), _vm._v(" "), _c("ul", _vm._l(_vm.properties, function (property) {
+    return _c("li", {
+      key: property.id
+    }, [_vm._v("\n            " + _vm._s(property.name) + "\n        ")]);
+  }), 0), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.properties.name))])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -2532,7 +2554,7 @@ var render = function render() {
     });
   }), 1) : _c("div", [_c("SearchSection", {
     attrs: {
-      serchString: _vm.serchString
+      searchAddress: _vm.searchAddress
     }
   })], 1);
 };

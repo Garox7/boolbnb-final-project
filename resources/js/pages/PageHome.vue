@@ -12,7 +12,7 @@
     </div>
     <div v-else>
         <SearchSection
-            :serchString="serchString"
+            :searchAddress="searchAddress"
         />
     </div>
 </template>
@@ -24,7 +24,7 @@ import SearchSection from '../components/SearchSection.vue';
 export default {
     props: {
         searchMode: Boolean,
-        serchString: String
+        searchAddress: String
     },
     components: {
         PropertyCardComponent,

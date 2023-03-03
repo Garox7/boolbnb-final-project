@@ -1,17 +1,15 @@
 <template>
     <div>
         <HeaderComponent
-            @searchProperty="getProperty"
+            @searchProperty="getSearchString"
         />
 
         <div class="main">
             <router-view
-                :serchString="serchString"
+                :searchAddress="searchAddress"
                 :searchMode="searchMode"
             />
         </div>
-
-        <!-- footer -->
     </div>
 </template>
 
@@ -25,14 +23,14 @@ export default {
     },
     data() {
         return {
-            serchString: '',
+            searchAddress: '',
             searchMode: false,
         }
     },
     methods: {
-        getProperty(data) {
-            this.serchString = data;
-            if (this.serchString != '') {
+        getSearchString(inputAddress) {
+            this.searchAddress = inputAddress;
+            if (this.searchAddress != '') {
                 this.searchMode = true;
             } else {
                 this.searchMode = false;
