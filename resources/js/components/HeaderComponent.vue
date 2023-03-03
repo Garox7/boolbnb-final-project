@@ -73,36 +73,57 @@
             </div>
 
             <div class="desktop-search">
-                <span class="search-icon">
-                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style="display: block; height: 16px; width: 16px; fill: currentcolor;">
-                        <path d="M13 0c7.18 0 13 5.82 13 13 0 2.868-.929 5.519-2.502 7.669l7.916 7.917-2.828 2.828-7.917-7.916A12.942 12.942 0 0 1 13 26C5.82 26 0 20.18 0 13S5.82 0 13 0zm0 4a9 9 0 1 0 0 18 9 9 0 0 0 0-18z" opacity=".8"></path>
-                    </svg>
-                </span>
+                <div class="search-container">
+                    <span class="search-icon">
+                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style="display: block; height: 16px; width: 16px; fill: currentcolor;">
+                            <path d="M13 0c7.18 0 13 5.82 13 13 0 2.868-.929 5.519-2.502 7.669l7.916 7.917-2.828 2.828-7.917-7.916A12.942 12.942 0 0 1 13 26C5.82 26 0 20.18 0 13S5.82 0 13 0zm0 4a9 9 0 1 0 0 18 9 9 0 0 0 0-18z" opacity=".8"></path>
+                        </svg>
+                    </span>
 
-                <span class="search-input">
-                    <input type="search" name="search" id="search" placeholder="Dove vuoi andare?" v-model="searchAddress" @input="$emit('searchProperty', searchAddress)">
-                </span>
+                    <span class="search-input">
+                        <input type="search" name="search" id="search" placeholder="Dove vuoi andare?" v-model="searchAddress" @input="$emit('searchProperty', searchAddress)">
+                    </span>
 
-                <span class="search-filter">
-                    <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style="display: block; height: 16px; width: 16px; fill: rgb(34, 34, 34);">
-                        <path d="M5 8c1.306 0 2.418.835 2.83 2H14v2H7.829A3.001 3.001 0 1 1 5 8zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6-8a3 3 0 1 1-2.829 4H2V4h6.17A3.001 3.001 0 0 1 11 2zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"></path>
-                    </svg>
-                </span>
+                    <span class="search-filter">
+                        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style="display: block; height: 16px; width: 16px; fill: rgb(34, 34, 34);">
+                            <path d="M5 8c1.306 0 2.418.835 2.83 2H14v2H7.829A3.001 3.001 0 1 1 5 8zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6-8a3 3 0 1 1-2.829 4H2V4h6.17A3.001 3.001 0 0 1 11 2zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"></path>
+                        </svg>
+                    </span>
+                </div>
             </div>
 
             <!-- user controls -->
-            <div class="user-controls">
-                <!--<a href="http://127.0.0.1:8000/admin">Accedi</a>-->
+            <div class="user-controls" @click="openDropdown">
                 <div class="controls">
                     <div class="control-icon">
                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style="display: block; fill: none; height: 16px; width: 16px; stroke: currentcolor; stroke-width: 3; overflow: visible;"><g fill="none" fill-rule="nonzero"><path d="m2 16h28"></path><path d="m2 24h28"></path><path d="m2 8h28"></path></g></svg>
                     </div>
                     <div class="user-icon">
-                        <a href="http://127.0.0.1:8000/admin">
-                            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style="display: block; height: 30px; width: 30px; fill: currentcolor;"><path d="m16 1c8.2842712 0 15 6.71572875 15 15 0 8.2842712-6.7157288 15-15 15-8.28427125 0-15-6.7157288-15-15 0-8.28427125 6.71572875-15 15-15zm0 8c-2.7614237 0-5 2.2385763-5 5 0 2.0143973 1.2022141 3.7998876 2.9996346 4.5835001l.0003231 2.0984999-.1499943.0278452c-2.8326474.5613112-5.31897338 2.2230336-6.93575953 4.5872979 2.34343054 2.291067 5.54974273 3.7028569 9.08579613 3.7028569 3.5355506 0 6.7414538-1.4113884 9.0850203-3.701476-1.6141801-2.3628535-4.0978119-4.0247647-6.929184-4.5867938l-.1558786-.0287302.001228-2.0991413c1.7288399-.7547474 2.9066959-2.4357565 2.9936498-4.355479l.0051645-.2283797c0-2.7614237-2.2385763-5-5-5zm0-6c-7.17970175 0-13 5.82029825-13 13 0 2.9045768.95257276 5.5866683 2.56235849 7.7509147 1.42074739-1.9134907 3.33951478-3.4002416 5.53860831-4.2955956l.3480332-.1363191-.0229565-.0189706c-1.43704227-1.2411241-2.34462949-3.045583-2.42083359-5.0285539l-.00520991-.2714755c0-3.8659932 3.1340068-7 7-7s7 3.1340068 7 7c0 1.9941317-.8415062 3.8279876-2.224566 5.1193683l-.225434.2006317.0447787.0163138c2.3268368.8792152 4.3570558 2.4138611 5.8430586 4.4127726 1.6098837-2.1632453 2.5621627-4.8449575 2.5621627-7.7490864 0-7.17970175-5.8202983-13-13-13z"></path></svg>
-                        </a>
+                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style="display: block; height: 30px; width: 30px; fill: currentcolor;"><path d="m16 1c8.2842712 0 15 6.71572875 15 15 0 8.2842712-6.7157288 15-15 15-8.28427125 0-15-6.7157288-15-15 0-8.28427125 6.71572875-15 15-15zm0 8c-2.7614237 0-5 2.2385763-5 5 0 2.0143973 1.2022141 3.7998876 2.9996346 4.5835001l.0003231 2.0984999-.1499943.0278452c-2.8326474.5613112-5.31897338 2.2230336-6.93575953 4.5872979 2.34343054 2.291067 5.54974273 3.7028569 9.08579613 3.7028569 3.5355506 0 6.7414538-1.4113884 9.0850203-3.701476-1.6141801-2.3628535-4.0978119-4.0247647-6.929184-4.5867938l-.1558786-.0287302.001228-2.0991413c1.7288399-.7547474 2.9066959-2.4357565 2.9936498-4.355479l.0051645-.2283797c0-2.7614237-2.2385763-5-5-5zm0-6c-7.17970175 0-13 5.82029825-13 13 0 2.9045768.95257276 5.5866683 2.56235849 7.7509147 1.42074739-1.9134907 3.33951478-3.4002416 5.53860831-4.2955956l.3480332-.1363191-.0229565-.0189706c-1.43704227-1.2411241-2.34462949-3.045583-2.42083359-5.0285539l-.00520991-.2714755c0-3.8659932 3.1340068-7 7-7s7 3.1340068 7 7c0 1.9941317-.8415062 3.8279876-2.224566 5.1193683l-.225434.2006317.0447787.0163138c2.3268368.8792152 4.3570558 2.4138611 5.8430586 4.4127726 1.6098837-2.1632453 2.5621627-4.8449575 2.5621627-7.7490864 0-7.17970175-5.8202983-13-13-13z"></path></svg>
                     </div>
-
+                    <div v-show="dropdownIsOpen" class="drop-menu">
+                        <div class="drop-item">
+                            <a class="drop-link"
+                                :href="[isLoggedIn ? '/admin/properties' : '/login']"
+                            >{{ isLoggedIn ? 'Le mie Proprietà' : 'Login' }}</a>
+                        </div>
+                        <div class="drop-item">
+                            <a class="drop-link"
+                                :href="[isLoggedIn ? '/admin/properties/create' : '/register']"
+                            >{{isLoggedIn ? 'Aggiungi Proprietà' : 'Registrati'}}</a>
+                        </div>
+                        <div v-if="isLoggedIn" class="drop-item">
+                            <a class="drop-link" href="/admin">Profilo</a>
+                        </div>
+                        <span v-if="isLoggedIn" class="divider"></span>
+                        <div v-if="isLoggedIn" class="drop-item logout">
+                            <a class="drop-link" href="#">
+                                Logout
+                            </a>
+                            <form id="logout-form" action="#" method="POST" class="d-none">
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -114,20 +135,22 @@ export default {
     name: 'HeaderComponent',
     data() {
         return {
-            user: window.user,
-            isLoggedIn: null,
+            isLoggedIn: window.user,
             searchAddress: '',
+            dropdownIsOpen: false,
         };
     },
-    created() {
-        if (user) { // è possibile togliere questo controllo e utilizzare solo this.user
-            this.isLoggedIn = true
-        } else {}
+    methods: {
+        openDropdown() {
+            this.dropdownIsOpen = !this.dropdownIsOpen;
+            console.log(this.dropdownIsOpen);
+        }
     }
 };
 </script>
 
 <style lang="scss" scoped>
+
 nav.desktop-nav {
     display: none;
 }
@@ -257,6 +280,7 @@ nav.mobile-nav {
         .user-controls {
             display: flex;
             align-items: center;
+            cursor: pointer;
 
             .controls {
                 margin-left: 20px;
@@ -265,9 +289,46 @@ nav.mobile-nav {
                 padding: 5px 5px 5px 12px;
                 display: flex;
                 align-items: center;
+                position: relative;
 
                 .user-icon {
                     margin-left: 10px;
+                }
+
+                .drop-menu {
+                    position: absolute;
+                    bottom: -5px;
+                    right: 0;
+                    width: 200px;
+                    background: var(--body-color);
+                    border: 1px solid var(--border-color);
+                    border-radius: 10px;
+                    transform: translateY(100%);
+                    display: flex;
+                    flex-direction: column;
+                    z-index: 15;
+
+                    .drop-item {
+                        width: 100%;
+                        padding: 8px 0 8px 8px;
+
+
+                        a {
+                            text-decoration: none;
+                            color: var(--text-color);
+                            width: 100%;
+                        }
+
+                        &.logout {
+                            font-weight: bold;
+                        }
+                    }
+
+                    .divider {
+                        background: var(--border-color);
+                        width: 100%;
+                        height: 1px;
+                    }
                 }
             }
         }
