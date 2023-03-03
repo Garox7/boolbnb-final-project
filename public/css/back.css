@@ -10913,6 +10913,7 @@ nav.mobile-nav .nav-container a span {
   nav.desktop-nav .user-controls {
     display: flex;
     align-items: center;
+    cursor: pointer;
   }
   nav.desktop-nav .user-controls .controls {
     margin-left: 20px;

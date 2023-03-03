@@ -137,7 +137,7 @@
         </nav>
 
         {{-- navigazione in mobile max: 744px --}}
-        <nav class="back mobile-nav">
+        <nav class="mobile-nav">
             {{-- bottoni di navigazione --}}
             <div class="nav-container">
                 <a href="{{ url('/') }}" class="nav-button">
