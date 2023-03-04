@@ -116,12 +116,8 @@
                             <a class="drop-link" href="/admin">Profilo</a>
                         </div>
                         <span v-if="isLoggedIn" class="divider"></span>
-                        <div v-if="isLoggedIn" class="drop-item logout">
-                            <a class="drop-link" href="#">
-                                Logout
-                            </a>
-                            <form id="logout-form" action="#" method="POST" class="d-none">
-                            </form>
+                        <div v-if="isLoggedIn" class="drop-item logout" @click="logout">
+                            <span class="drop-link">Logout</span>
                         </div>
                     </div>
                 </div>
@@ -144,6 +140,15 @@ export default {
         openDropdown() {
             this.dropdownIsOpen = !this.dropdownIsOpen;
             console.log(this.dropdownIsOpen);
+        },
+        logout() {
+            axios.post('/logout')
+                .then(response => {
+                    location.reload();
+                })
+                .catch(error => {
+                    console.error(error);
+            });
         }
     }
 };
@@ -156,8 +161,14 @@ nav.desktop-nav {
 }
 
 .header-mobile{
+    background: white;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
     height: 70px;
-    padding: 14px 24px 0;
+    padding: 14px 24px 10px;
+    z-index: 10;
 
     .mobile-search {
         width: 100%;
@@ -248,13 +259,19 @@ nav.mobile-nav {
     }
 
     nav.desktop-nav {
+        background: white;
         display: block;
+        position:fixed;
+        left: 0;
+        top: 0;
+        right: 0;
         height: 80px;
         border-bottom: 1px solid var(--border-color);
         padding: 0 40px;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        z-index: 10;
 
         .nav-logo .logo-link {
             color: var(--button-color);
@@ -272,9 +289,49 @@ nav.mobile-nav {
         .desktop-search {
             display: block;
             flex: 2 1 auto;
+            height: 100%;
             max-width: 500px;
-            background: red;
             padding: 14px 24px;
+
+            .search-container {
+                height: 100%;
+                border-radius: 35px;
+                box-shadow: 0 3px 10px rgb(0 0 0 / 10%);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .search-icon {
+                    width: 55px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .search-input {
+                    flex: 1 1 auto;
+
+                    input {
+                        width: 100%;
+                        height: 40px;
+                        border: none;
+                        outline: none;
+
+                        &::placeholder {
+                            color: var(--text-color);
+                            font-weight: 600;
+                        }
+                    }
+                }
+
+                .search-filter {
+                    width: 55px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+
         }
 
         .user-controls {
