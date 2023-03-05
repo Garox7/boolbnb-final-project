@@ -10549,28 +10549,72 @@ if (controlBtn && dropMenu) {
 
 // create.blade.php
 // bottone per aggiunta di ulteriori immagini
-var input = document.querySelector('#image');
-var preview = document.querySelector('#image-preview');
-var addButton = document.querySelector('#add-image');
-if (input && preview && addButton) {
-  input.addEventListener('change', function () {
-    preview.innerHTML = ''; // pulisce il contenitore delle anteprime
-    var files = this.files;
-    for (var i = 0; i < files.length; i++) {
-      var file = files[i];
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        var img = new Image();
-        img.src = e.target.result;
-        preview.appendChild(img);
-      };
-      reader.readAsDataURL(file);
+// const input = document.querySelector('#image');
+// const preview = document.querySelector('#image-preview');
+// const addButton = document.querySelector('#add-image');
+
+// if(input && preview && addButton) {
+
+//     input.addEventListener('change', function () {
+//       preview.innerHTML = ''; // pulisce il contenitore delle anteprime
+//       const files = this.files;
+//       for (let i = 0; i < files.length; i++) {
+//         const file = files[i];
+//         const reader = new FileReader();
+//         reader.onload = function (e) {
+//           const img = new Image();
+//           img.src = e.target.result;
+//           preview.appendChild(img);
+//         };
+//         reader.readAsDataURL(file);
+//       }
+//       addButton.classList.remove('d-none'); // rende visibile il pulsante per aggiungere altre immagini
+//     });
+
+//     addButton.addEventListener('click', function () {
+//       input.click(); // simula il click sull'input di file
+//     });
+// }
+
+var addressInput = document.querySelector('#address');
+if (addressInput) {
+  var getAddressList = function getAddressList(query) {
+    var url = "https://api.tomtom.com/search/2/autocomplete/".concat(query, ".json?key=").concat(apiKey);
+    fetch(url).then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      updateAddressList(data);
+      console.log(data); // DEBUG
+    });
+  };
+  var updateAddressList = function updateAddressList(results) {
+    var resultsList = document.getElementById('results-list');
+    resultsList.innerHTML = '';
+    results.forEach(function (result) {
+      var resultItem = document.createElement('li');
+      resultItem.innerText = result.address;
+      resultItem.addEventListener('click', function () {
+        addressInput.value = result.address;
+        getCoordinates(results.address);
+      });
+      resultsList.appendChild(resultItem);
+    });
+  };
+  var getCoordinates = function getCoordinates(address) {
+    var url = "https://api.tomtom.com/search/2/geocode/".concat(address, ".json?key=").concat(apiKey);
+    fetch(url).then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      console.log(data); // DEBUG
+    });
+  };
+  var apiKey = "zQSLG1XXXjp9BcJfANhZadroJJlmpVn1";
+  addressInput.addEventListener('keyup', function (e) {
+    var query = e.target.value;
+    console.log('hai pigiato');
+    if (query.length > 1) {
+      getAddressList(query);
     }
-    addButton.classList.remove('d-none'); // rende visibile il pulsante per aggiungere altre immagini
-    iput;
-  });
-  addButton.addEventListener('click', function () {
-    input.click(); // simula il click sull'input di file
   });
 }
 

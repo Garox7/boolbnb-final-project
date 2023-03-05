@@ -24,6 +24,11 @@
         <div class="mb-3">
             <label for="address" class="form-label">address</label>
             <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address') }}">
+            <div id="results-list"></div>
+
+            <input type="hidden" name="latitude" id="latitude-input">
+            <input type="hidden" name="longitude" id="longitude-input">
+
             <div class="invalid-feedback">
                 @error('address')
                     <ul>
@@ -96,25 +101,24 @@
         </div>
 
         {{-- SERVICE --}}
-        @foreach($services as $service)
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="{{$service->id}}" id="service{{$service->id}}" name="services[]">
-                <label class="form-check-label" for="service{{$service->id}}">{{$service->name}}</label>
-            </div>
-        @endforeach
-
-
-
+        <div class="mb-3">
+            @foreach($services as $service)
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="{{$service->id}}" id="service{{$service->id}}" name="services[]">
+                    <label class="form-check-label" for="service{{$service->id}}">{{$service->name}}</label>
+                </div>
+            @endforeach
+        </div>
 
         {{-- FILE IMAGE --}}
-        <div id="image-preview"></div>
+        {{-- <div id="image-preview"></div> --}}
         <div id="image-fields">
             <div class="mb-3">
                 <label for="image" class="form-label">Seleziona una o più immagini</label>
                 <input type="file" class="form-control" id="image" name="image[]" multiple>
             </div>
         </div>
-        {{--<button type="button" id="add-image" class="btn btn-secondary mb-3 d-none">Aggiungi immagine</button>--}}
+        {{-- <button type="button" id="add-image" class="btn btn-secondary mb-3 d-none">Aggiungi immagine</button> --}}
         @if ($errors->has('image') || $errors->has('image.*'))
             <ul>
                 @foreach ($errors->get('image') as $error)

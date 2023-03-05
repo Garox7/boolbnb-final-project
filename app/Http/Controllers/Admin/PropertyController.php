@@ -54,8 +54,11 @@ class PropertyController extends Controller
         // Validazione
         $request->validate([
             'name' => 'required|string|max:255',
+            // TODO: inserire lo slug
             'description' => 'string',
             'address' => 'required|string|max:255',
+            'latitude' => 'string|max:255',
+            'longitude' => 'string|max:255',
             'bedroom_count' => 'required|integer|min:1|max:20',
             'bed_count' => 'required|integer|min:1|max:20',
             'bathroom_count' => 'required|integer|min:1|max:20',
@@ -67,13 +70,15 @@ class PropertyController extends Controller
         // Salvataggio dati
         $property = new Property();
         $property->name = $data['name'];
+        $property->slug = $data['name'];
         $property->description = $data['description'];
-        $property->user_id = auth()->id();
         $property->address = $data['address'];
+        $property->latitude = $data['latitude'];
+        $property->longitude = $data['longitude'];
         $property->bedroom_count = $data['bedroom_count'];
         $property->bed_count = $data['bed_count'];
         $property->bathroom_count = $data['bathroom_count'];
-        $property->slug = $data['name'];
+        $property->user_id = auth()->id();
         $property->save();
 
         if (array_key_exists('services', $data)) {
