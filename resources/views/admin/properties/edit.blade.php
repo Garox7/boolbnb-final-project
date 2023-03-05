@@ -23,7 +23,7 @@
 
         {{-- ADDRESS --}}
         <div class="mb-3">
-            <label for="address" class="form-label">address</label>
+            <label for="address" class="form-label">Indirizzo</label>
             <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address', $property->address) }}">
             <div class="invalid-feedback">
                 @error('address')
@@ -38,7 +38,7 @@
 
         {{-- BEDROOM --}}
         <div class="mb-3">
-            <label for="bedroom_count" class="form-label">Numero camere da letto</label>
+            <label for="bedroom_count" class="form-label">Camere da letto</label>
             <select class="form-select @error('bedroom_count') is-invalid @enderror" aria-label="Default select example" id="bedroom_count" name="bedroom_count">
                 <option value="">Seleziona il numero di camere da letto</option>
                 @for($i = 1; $i <= 20; $i++)
@@ -58,7 +58,7 @@
 
         {{-- BED --}}
         <div class="mb-3">
-            <label for="bed_count" class="form-label">Numero di letti</label>
+            <label for="bed_count" class="form-label">Letti</label>
             <select class="form-select" aria-label="Default select example" id="bed_count" name="bed_count">
                 <option value="">Seleziona il numero di posti letto</option>
                 @for($i = 1; $i <= 20; $i++)
@@ -78,7 +78,7 @@
 
         {{-- BATHROOM  --}}
         <div class="mb-3">
-            <label for="bathroom_count" class="form-label">Numero di bagni</label>
+            <label for="bathroom_count" class="form-label">Bagni</label>
             <select class="form-select" aria-label="Default select example" id="bathroom_count" name="bathroom_count">
                 <option value="">Seleziona il numero di bagni</option>
                 @for($i = 1; $i <= 20; $i++)
@@ -97,17 +97,18 @@
         </div>
 
         {{--Services--}}
-
-        @foreach($services as $service)
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="{{$service->id}}" id="service{{$service->id}}" name="services[]"
-                    @if ($service->properties->contains($property->id))
-                        checked
-                    @endif>
-                <label class="form-check-label" for="service{{$service->id}}">{{$service->name}}</label>
-            </div>
-        @endforeach
-
+        <div class="mb-3">
+            <label for="bathroom_count" class="form-label">Servizi</label>
+            @foreach($services as $service)
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="{{$service->id}}" id="service{{$service->id}}" name="services[]"
+                        @if ($service->properties->contains($property->id))
+                            checked
+                        @endif>
+                    <label class="form-check-label" for="service{{$service->id}}">{{$service->name}}</label>
+                </div>
+            @endforeach
+        </div>
         {{-- FILE IMAGE --}}
         {{--
         <div id="image-fields">

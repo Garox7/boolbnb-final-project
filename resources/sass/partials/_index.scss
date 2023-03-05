@@ -2,6 +2,41 @@
     position: relative;
 }
 
+.btn-outline-primary {
+    --bs-btn-hover-color: var(--bs-white);
+    --bs-btn-hover-border-color: #{rgb(117, 69, 240)};
+    --bs-btn-hover-bg: rgb(117, 69, 240);
+    --bs-btn-color: rgb(117, 69, 240);
+    --bs-btn-active-color: var(--bs-white);
+    --bs-btn-active-bg: #{rgb(117, 69, 240)};
+    --bs-btn-active-border-color: #{rgb(117, 69, 240)};
+}
+
+.btn-danger {
+    --bs-btn-hover-color: var(--bs-white);
+    --bs-btn-color: var(--bs-white);
+    --bs-btn-active-color: var(--bs-white);
+}
+
+.btn-group {
+    a {
+        border-color: rgb(117, 69, 240);
+    }
+}
+
+.card {
+    --#{$prefix}card-border-color: rgb(117, 69, 240);
+    --#{$prefix}card-bg: #{rgb(246, 243, 255)};
+
+    p {
+        color: rgb(72, 72, 72);
+    }
+
+    img {
+        border-bottom: 1px solid rgb(117, 69, 240);
+    }
+}
+
 .delete-popup-backdrop {
     background-color: rgb(0, 0, 0, 0.3);
     position: fixed;
