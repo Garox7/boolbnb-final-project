@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    <h1>Nuova proprietà</h1>
     <form action="{{ route('admin.properties.store') }}" method="post" class="needs-validation" enctype="multipart/form-data" novalidate>
         @csrf()
 
@@ -22,7 +23,7 @@
 
         {{-- ADDRESS --}}
         <div class="mb-3">
-            <label for="address" class="form-label">address</label>
+            <label for="address" class="form-label">Indirizzo</label>
             <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address') }}">
             <div class="invalid-feedback">
                 @error('address')
@@ -37,7 +38,7 @@
 
         {{-- BEDROOM --}}
         <div class="mb-3">
-            <label for="bedroom_count" class="form-label">Numero camere da letto</label>
+            <label for="bedroom_count" class="form-label">Camere da letto</label>
             <select class="form-select @error('bedroom_count') is-invalid @enderror" aria-label="Default select example" id="bedroom_count" name="bedroom_count">
                 <option value="">Seleziona il numero di camere da letto</option>
                 @for($i = 1; $i <= 20; $i++)
@@ -57,7 +58,7 @@
 
         {{-- BED --}}
         <div class="mb-3">
-            <label for="bed_count" class="form-label">Numero di letti</label>
+            <label for="bed_count" class="form-label">Letti</label>
             <select class="form-select @error('bed_count') is-invalid @enderror" aria-label="Default select example" id="bed_count" name="bed_count">
                 <option value="">Seleziona il numero di posti letto</option>
                 @for($i = 1; $i <= 20; $i++)
@@ -77,7 +78,7 @@
 
         {{-- BATHROOM  --}}
         <div class="mb-3">
-            <label for="bathroom_count" class="form-label">Numero di bagni</label>
+            <label for="bathroom_count" class="form-label">Bagni</label>
             <select class="form-select @error('bathroom_count') is-invalid @enderror" aria-label="Default select example" id="bathroom_count" name="bathroom_count">
                 <option value="">Seleziona il numero di bagni</option>
                 @for($i = 1; $i <= 20; $i++)
@@ -96,12 +97,15 @@
         </div>
 
         {{-- SERVICE --}}
-        @foreach($services as $service)
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="{{$service->id}}" id="service{{$service->id}}" name="services[]">
-                <label class="form-check-label" for="service{{$service->id}}">{{$service->name}}</label>
-            </div>
-        @endforeach
+        <div class="mb-3">
+            <label for="bathroom_count" class="form-label">Servizi</label>
+            @foreach($services as $service)
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="{{$service->id}}" id="service{{$service->id}}" name="services[]">
+                    <label class="form-check-label" for="service{{$service->id}}">{{$service->name}}</label>
+                </div>
+            @endforeach
+        </div>
 
 
 
@@ -110,7 +114,7 @@
         <div id="image-preview"></div>
         <div id="image-fields">
             <div class="mb-3">
-                <label for="image" class="form-label">Seleziona una o più immagini</label>
+                <label for="image" class="form-label">Seleziona un' immagine</label>
                 <input type="file" class="form-control" id="image" name="image[]" multiple>
             </div>
         </div>
@@ -126,7 +130,7 @@
         {{-- DESCRIPTION --}}
         <div class="mb-3">
             <label for="description" class="form-label">Descrizione</label>
-            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ old('description') }}</textarea>
+            <textarea placeholder="Descrizione" class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ old('description') }}</textarea>
             <div class="invalid-feedback">
                 @error('description')
                     <ul>
