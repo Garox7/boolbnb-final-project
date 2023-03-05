@@ -10965,6 +10965,33 @@ nav.mobile-nav .nav-container a span {
   position: relative;
 }
 
+.btn-outline-primary {
+  --bs-btn-hover-color: var(--bs-white);
+  --bs-btn-hover-border-color: rgb(117, 69, 240);
+  --bs-btn-hover-bg: rgb(117, 69, 240);
+  --bs-btn-color: rgb(117, 69, 240);
+  --bs-btn-active-color: var(--bs-white);
+  --bs-btn-active-bg: rgb(117, 69, 240);
+  --bs-btn-active-border-color: rgb(117, 69, 240);
+}
+
+.btn-danger {
+  --bs-btn-hover-color: var(--bs-white);
+  --bs-btn-color: var(--bs-white);
+  --bs-btn-active-color: var(--bs-white);
+}
+
+.btn-group a {
+  border-color: rgb(117, 69, 240);
+}
+
+.card p {
+  color: rgb(72, 72, 72);
+}
+.card img {
+  border-bottom: 1px solid rgb(117, 69, 240);
+}
+
 .delete-popup-backdrop {
   background-color: rgba(0, 0, 0, 0.3);
   position: fixed;
@@ -11032,4 +11059,9 @@ nav.mobile-nav .nav-container a span {
 }
 .delete-popup-backdrop.hidden {
   display: none;
+}
+
+.title-list {
+  background-color: rgb(133, 90, 241);
+  color: white;
 }

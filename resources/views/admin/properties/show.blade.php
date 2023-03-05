@@ -35,24 +35,26 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-        <h1>{{ $property->address}}</h1>
-        <p> <span class="strong">DESCRIZIONE:</span>  {{$property->description}}</p>
-        <div class="info">
-            <div>NUMERO LETTI: {{ $property->bed_count }}</div>
-            <div>NUMERO STANZE DA LETTO: {{ $property->bedroom_count }}</div>
-            <div>NUMERO BAGNI: {{ $property->bathroom_count }}</div>
-        </div>
+        <h3>{{ $property->address}}</h3>
+        <p class="fs-5 lh-sm mb-4">{{$property->description}}</p>
+
+        <ul class="list-group mb-4">
+            <li class="list-group-item title-list">INFO</li>
+            <li class="list-group-item">LETTI: {{ $property->bed_count }}</li>
+            <li class="list-group-item">STANZE DA LETTO: {{ $property->bedroom_count }}</li>
+            <li class="list-group-item">BAGNI: {{ $property->bathroom_count }}</li>
+        </ul>
 
 
-        <ul class="list-group">
+        <ul class="list-group mb-4">
             @if(count($property->services) > 0)
-            <li class="list-group-item">SERVIZI OFFERTI:</li>
+            <li class="list-group-item title-list">SERVIZI OFFERTI:</li>
             @endif
             @foreach ($property->services as $service)
             <li class="list-group-item">{{ $service->name }}</li>
             @endforeach
         </ul>
-        <div>PROPRIETARIO: {{ $property->user->first_name}}</div>
+        <div>PROPRIETARIO: {{ strtoupper($property->user->first_name)}}</div>
 
     </div>
 
