@@ -10538,7 +10538,9 @@ __webpack_require__(/*! ./common */ "./resources/js/common.js");
 
 // MY JavaScript
 
-//app.blade.php
+/************ APP.BLADE.PHP (LAYOUT BASE) ************/
+
+// finestra dropdown di menù profilo
 var controlBtn = document.querySelector('.controls');
 var dropMenu = controlBtn.querySelector('.drop-menu');
 if (controlBtn && dropMenu) {
@@ -10547,14 +10549,14 @@ if (controlBtn && dropMenu) {
   });
 }
 
-// create.blade.php
+/************ CREATE.BLADE.PHP ************/
+
 // bottone per aggiunta di ulteriori immagini
 // const input = document.querySelector('#image');
 // const preview = document.querySelector('#image-preview');
 // const addButton = document.querySelector('#add-image');
 
 // if(input && preview && addButton) {
-
 //     input.addEventListener('change', function () {
 //       preview.innerHTML = ''; // pulisce il contenitore delle anteprime
 //       const files = this.files;
@@ -10576,15 +10578,16 @@ if (controlBtn && dropMenu) {
 //     });
 // }
 
+// API TomTom per ottenere latitudine e longitudine dell'indirizzo
 var addressInput = document.querySelector('#address');
 if (addressInput) {
   var getAddressList = function getAddressList(query) {
-    var url = "https://api.tomtom.com/search/2/autocomplete/".concat(query, ".json?key=").concat(apiKey);
+    var url = "https://api.tomtom.com/search/2/geocode/".concat(query, ".json?key=").concat(apiKey, "&countrySet=IT&limit=5&language=it-IT");
     fetch(url).then(function (response) {
       return response.json();
     }).then(function (data) {
-      updateAddressList(data);
-      console.log(data); // DEBUG
+      console.log('risultati della ricerca', data); // DEBUG
+      updateAddressList(data.results);
     });
   };
   var updateAddressList = function updateAddressList(results) {
@@ -10592,33 +10595,45 @@ if (addressInput) {
     resultsList.innerHTML = '';
     results.forEach(function (result) {
       var resultItem = document.createElement('li');
-      resultItem.innerText = result.address;
+      resultItem.innerText = result.address.freeformAddress;
       resultItem.addEventListener('click', function () {
-        addressInput.value = result.address;
-        getCoordinates(results.address);
+        addressInput.value = result.address.freeformAddress;
+        getCoordinates(result.address.freeformAddress);
+        resultsList.innerHTML = '';
       });
       resultsList.appendChild(resultItem);
     });
   };
   var getCoordinates = function getCoordinates(address) {
-    var url = "https://api.tomtom.com/search/2/geocode/".concat(address, ".json?key=").concat(apiKey);
-    fetch(url).then(function (response) {
+    var urlCoordinate = "https://api.tomtom.com/search/2/geocode/".concat(address, ".json?key=").concat(apiKey, "&countrySet=IT&limit=5");
+    fetch(urlCoordinate).then(function (response) {
       return response.json();
     }).then(function (data) {
-      console.log(data); // DEBUG
+      assignCoordinate(data.results);
     });
   };
-  var apiKey = "zQSLG1XXXjp9BcJfANhZadroJJlmpVn1";
+  var assignCoordinate = function assignCoordinate(results) {
+    console.log('prendo il miglior punteggio', results); // DEBUG
+
+    var latitudeInput = document.getElementById('latitude-input');
+    var longitudeInput = document.getElementById('longitude-input');
+    latitudeInput.value = results[0].position.lat;
+    longitudeInput.value = results[0].position.lon;
+    console.log('latitudine', latitudeInput.value); // DEBUG
+    console.log('longitudine', longitudeInput.value); // DEBUG
+  };
+  var apiKey = "pHHustjVtZP4zcljXIwtAYeEAtmslE3K";
   addressInput.addEventListener('keyup', function (e) {
     var query = e.target.value;
-    console.log('hai pigiato');
-    if (query.length > 1) {
+    if (query.length > 3) {
       getAddressList(query);
     }
   });
 }
 
-// index.blade.php
+/************ INDEX.BLADE.PHP ************/
+
+// finestra di conferma eliminazione proprietà
 var deletePopup = document.querySelector('.delete-popup-backdrop');
 if (deletePopup) {
   var hideSuccessMessage = function hideSuccessMessage() {
