@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
+use App\Service;
 use App\Property;
 use App\PropertyImages;
 use Illuminate\Http\Request;
+use function PHPSTORM_META\map;
+
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
-use App\Service;
 
 class PropertyController extends Controller
 {
@@ -54,14 +57,19 @@ class PropertyController extends Controller
         // Validazione
         $request->validate([
             'name' => 'required|string|max:255',
-            // TODO: inserire lo slug
+            // 'slug' => 'string|max:100|unique:properties',
             'description' => 'string',
             'address' => 'required|string|max:255',
-            'latitude' => 'string|max:255',
-            'longitude' => 'string|max:255',
+            'city' => 'string|max:255',
+            'region' => 'string|max:255',
+            'country' => 'string|max:255',
+            'latitude' => 'required|string|max:255',
+            'longitude' => 'required|string|max:255',
             'bedroom_count' => 'required|integer|min:1|max:20',
             'bed_count' => 'required|integer|min:1|max:20',
             'bathroom_count' => 'required|integer|min:1|max:20',
+            'services' => 'array',
+            'services.*' => 'integer|exists:services,id',
             'image.*' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
@@ -69,21 +77,26 @@ class PropertyController extends Controller
 
         // Salvataggio dati
         $property = new Property();
+        $property->user_id = auth()->id();
         $property->name = $data['name'];
-        $property->slug = $data['name'];
+        $property->slug = $property->getSlug($data['name']);
         $property->description = $data['description'];
         $property->address = $data['address'];
+        $property->city = $data['city'];
+        $property->region = $data['region'];
+        $property->country = $data['country'];
         $property->latitude = $data['latitude'];
         $property->longitude = $data['longitude'];
         $property->bedroom_count = $data['bedroom_count'];
         $property->bed_count = $data['bed_count'];
         $property->bathroom_count = $data['bathroom_count'];
-        $property->user_id = auth()->id();
         $property->save();
 
+        // associazione della proprietà ai servizi
         if (array_key_exists('services', $data)) {
             $property->services()->attach($data['services']);
         }
+
         // Controllo e salvataggio immagini
         if ($request->hasFile('image')) {
             foreach ($request->file('image') as $image) {
@@ -138,32 +151,54 @@ class PropertyController extends Controller
      */
     public function update(Request $request, Property $property)
     {
+        // validazione
         $request->validate([
             'name' => 'required|string|max:255',
+            'slug' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('properties')->ignore($property)
+            ],
             'description' => 'string',
             'address' => 'required|string|max:255',
+            'city' => 'string|max:255',
+            'region' => 'string|max:255',
+            'country' => 'string|max:255',
+            'latitude' => 'required|string|max:255',
+            'longitude' => 'required|string|max:255',
             'bedroom_count' => 'required|integer|max:20',
             'bed_count' => 'required|integer|max:20',
             'bathroom_count' => 'required|integer|max:20',
+            'services.*' => 'integer|exists:services,id'
         ]);
 
         $data = $request->all();
 
         // salvataggio dati
         $property->name = $data['name'];
-        $property->description = $data['description'];
         $property->user_id = auth()->id();
+        $property->description = $data['description'];
         $property->address = $data['address'];
+        $property->city = $data['city'];
+        $property->region = $data['region'];
+        $property->country = $data['country'];
+        $property->latitude = $data['latitude'];
+        $property->longitude = $data['longitude'];
         $property->bedroom_count = $data['bedroom_count'];
         $property->bed_count = $data['bed_count'];
         $property->bathroom_count = $data['bathroom_count'];
+
+        // controllo e aggiornamento slug
+        if ($property->isDirty('name')) {
+            $property->slug = $property->getSlug($data['name']);
+        };
+
+        // aggiorno i dati
         $property->update();
 
-        if (array_key_exists('services', $data)) {
-            $property->services()->sync($data['services']);
-        } else {
-            $property->services()->detach();
-        }
+        // aggiornamento dei servizi
+        $property->services()->sync($data['services']);
 
         // redirezionamento
         return redirect()

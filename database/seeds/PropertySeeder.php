@@ -16,6 +16,28 @@ class PropertySeeder extends Seeder
      */
     public function run(Faker $faker)
     {
+        $regions = [
+            'Abruzzo',
+            'Basilicata',
+            'Calabria',
+            'Campania',
+            'Emilia Romagna',
+            'Friuli Venezia Giulia',
+            'Lazio',
+            'Liguria',
+            'Lombardia',
+            'Marche',
+            'Molise',
+            'Piemonte',
+            'Puglia',
+            'Sardegna',
+            'Sicilia',
+            'Toscana',
+            'Trentino Alto Adige',
+            'Umbria',
+            'Valle d\'Aosta',
+            'Veneto',
+        ];
         $faker = Faker::create('it_IT');
         $userId = User::all('id')->all();
         $serviceId = Service::all()->pluck('id');
@@ -31,6 +53,9 @@ class PropertySeeder extends Seeder
                 'description' => $faker->paragraphs(2, true),
                 'user_id' => $faker->randomElement($userId)->id,
                 'address' => $faker->address(),
+                'city' => $faker->city(),
+                'region' => $faker->randomElement($regions),
+                'country' => 'Italia',
                 'latitude' => $faker->latitude(),
                 'longitude' => $faker->longitude(),
                 'bedroom_count' => rand(1, 20),

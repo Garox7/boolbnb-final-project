@@ -15,11 +15,14 @@ class CreatePropertiesTable extends Migration
     {
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 150);
-            $table->string('slug')->unique();
-            $table->text('description')->nullable();
             $table->foreignId('user_id')->constrained();
+            $table->string('name', 150);
+            $table->string('slug', 100)->unique();
+            $table->text('description')->nullable();
             $table->string('address', 150);
+            $table->string('city', 150);
+            $table->string('region', 150);
+            $table->string('country', 150);
             $table->string('latitude', 50)->nullable();
             $table->string('longitude', 50)->nullable();
             $table->string('bedroom_count', 10);

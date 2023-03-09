@@ -10617,10 +10617,19 @@ if (addressInput) {
 
     var latitudeInput = document.getElementById('latitude-input');
     var longitudeInput = document.getElementById('longitude-input');
+    var cityInput = document.getElementById('city-input');
+    var regionInput = document.getElementById('region-input');
+    var countryInput = document.getElementById('country-input');
     latitudeInput.value = results[0].position.lat;
     longitudeInput.value = results[0].position.lon;
+    cityInput.value = results[0].address.countrySecondarySubdivision;
+    regionInput.value = results[0].address.countrySubdivision;
+    countryInput.value = results[0].address.country;
     console.log('latitudine', latitudeInput.value); // DEBUG
     console.log('longitudine', longitudeInput.value); // DEBUG
+    console.log('Città', cityInput.value); // DEBUG
+    console.log('Regione', regionInput.value); // DEBUG
+    console.log('Country', countryInput.value); // DEBUG
   };
   var apiKey = "pHHustjVtZP4zcljXIwtAYeEAtmslE3K";
   addressInput.addEventListener('keyup', function (e) {

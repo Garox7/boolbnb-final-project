@@ -16,7 +16,7 @@
     @endif
 
     <div class="container">
-        <h1 class="mb-4">{{strtoupper($property->name)}}</h1>
+        <h1 class="mb-4">{{ strtoupper($property->name) }}</h1>
 
         <div id="carouselExampleControls" class="carousel slide mb-4" data-bs-ride="carousel">
             <div class="carousel-inner">
@@ -35,7 +35,7 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-        <h1>{{ $property->address}}</h1>
+        <h1>{{ $property->address }}</h1>
         <p> <span class="strong">DESCRIZIONE:</span>  {{$property->description}}</p>
         <div class="info">
             <div>NUMERO LETTI: {{ $property->bed_count }}</div>

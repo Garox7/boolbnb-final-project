@@ -9,6 +9,7 @@
         <div class="mb-3">
             <label for="name" class="form-label">Titolo</label>
             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
+            <input type="hidden" name="slug" value="{{ old('slug') }}">
             <div class="invalid-feedback">
                 @error('name')
                     <ul>
@@ -22,12 +23,15 @@
 
         {{-- ADDRESS --}}
         <div class="mb-3">
-            <label for="address" class="form-label">address</label>
+            <label for="address" class="form-label">Indirizzo</label>
             <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address') }}">
-            <div id="results-list"></div>
+            <input type="hidden" name="latitude" id="latitude-input" value="{{ old('latitude') }}">
+            <input type="hidden" name="longitude" id="longitude-input" value="{{ old('longitude') }}">
+            <input type="hidden" name="city" id="city-input" value="{{ old('city') }}">
+            <input type="hidden" name="region" id="region-input" value="{{ old('region') }}">
+            <input type="hidden" name="country" id="country-input" value="{{ old('country') }}">
 
-            <input type="hidden" name="latitude" id="latitude-input">
-            <input type="hidden" name="longitude" id="longitude-input">
+            <div id="results-list"></div>
 
             <div class="invalid-feedback">
                 @error('address')
@@ -104,10 +108,24 @@
         <div class="mb-3">
             @foreach($services as $service)
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="{{$service->id}}" id="service{{$service->id}}" name="services[]">
-                    <label class="form-check-label" for="service{{$service->id}}">{{$service->name}}</label>
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value="{{$service->id}}"
+                        id="service-{{$service->id}}"
+                        name="services[]"
+                        @if(in_array($service->id, old('services', []))) checked @endif
+                    >
+                    <label class="form-check-label" for="service{{$service->id}}">
+                        {{$service->name}}
+                    </label>
                 </div>
             @endforeach
+            @if($errors->has('services') || $errors->has('services.*'))
+                <div>
+                    I servizi selezionati non sono invalidi
+                </div>
+            @endif
         </div>
 
         {{-- FILE IMAGE --}}

@@ -10,6 +10,7 @@
         <div class="mb-3">
             <label for="name" class="form-label">Titolo</label>
             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name', $property->name) }}">
+            <input type="hidden" name="slug" value="{{ old('slug', $property->slug) }}">
             <div class="invalid-feedback">
                 @error('name')
                     <ul>
@@ -23,8 +24,13 @@
 
         {{-- ADDRESS --}}
         <div class="mb-3">
-            <label for="address" class="form-label">address</label>
+            <label for="address" class="form-label">Indirizzo</label>
             <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address', $property->address) }}">
+            <input type="hidden" name="latitude" id="latitude-input" value="{{ old('latitude', $property->latitude) }}">
+            <input type="hidden" name="longitude" id="longitude-input" value="{{ old('longitude', $property->longitude) }}">
+            <input type="hidden" name="city" id="city-input" value="{{ old('city', $property->city) }}">
+            <input type="hidden" name="region" id="region-input" value="{{ old('region', $property->region) }}">
+            <input type="hidden" name="country" id="country-input" value="{{ old('country', $property->country) }}">
             <div class="invalid-feedback">
                 @error('address')
                     <ul>

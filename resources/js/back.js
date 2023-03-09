@@ -94,11 +94,20 @@ if (addressInput) {
 
         const latitudeInput = document.getElementById('latitude-input');
         const longitudeInput = document.getElementById('longitude-input');
+        const cityInput = document.getElementById('city-input');
+        const regionInput = document.getElementById('region-input');
+        const countryInput = document.getElementById('country-input');
         latitudeInput.value = results[0].position.lat;
         longitudeInput.value = results[0].position.lon;
+        cityInput.value = results[0].address.countrySecondarySubdivision;
+        regionInput.value = results[0].address.countrySubdivision;
+        countryInput.value = results[0].address.country;
 
         console.log('latitudine', latitudeInput.value); // DEBUG
         console.log('longitudine', longitudeInput.value); // DEBUG
+        console.log('Città', cityInput.value); // DEBUG
+        console.log('Regione', regionInput.value); // DEBUG
+        console.log('Country', countryInput.value); // DEBUG
     }
 }
 
