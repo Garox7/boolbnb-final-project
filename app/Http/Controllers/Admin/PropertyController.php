@@ -7,13 +7,33 @@ use App\Service;
 use App\Property;
 use App\PropertyImages;
 use Illuminate\Http\Request;
-use function PHPSTORM_META\map;
 
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 
 class PropertyController extends Controller
 {
+    private $validation = [
+        'name' => 'required|string|max:255',
+        'slug' => [
+            'string',
+            'max:100'
+        ],
+        'description' => 'string',
+        'address' => 'required|string|max:255',
+        'city' => 'string|max:255',
+        'region' => 'string|max:255',
+        'country' => 'string|max:255',
+        'latitude' => 'required|string|max:255',
+        'longitude' => 'required|string|max:255',
+        'bedroom_count' => 'required|integer|min:1|max:20',
+        'bed_count' => 'required|integer|min:1|max:20',
+        'bathroom_count' => 'required|integer|min:1|max:20',
+        'services' => 'array',
+        'services.*' => 'integer|exists:services,id',
+        'image.*' => 'image|mimes:jpeg,png,jpg|max:2048',
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -55,23 +75,8 @@ class PropertyController extends Controller
     public function store(Request $request)
     {
         // Validazione
-        $request->validate([
-            'name' => 'required|string|max:255',
-            // 'slug' => 'string|max:100|unique:properties',
-            'description' => 'string',
-            'address' => 'required|string|max:255',
-            'city' => 'string|max:255',
-            'region' => 'string|max:255',
-            'country' => 'string|max:255',
-            'latitude' => 'required|string|max:255',
-            'longitude' => 'required|string|max:255',
-            'bedroom_count' => 'required|integer|min:1|max:20',
-            'bed_count' => 'required|integer|min:1|max:20',
-            'bathroom_count' => 'required|integer|min:1|max:20',
-            'services' => 'array',
-            'services.*' => 'integer|exists:services,id',
-            'image.*' => 'image|mimes:jpeg,png,jpg|max:2048',
-        ]);
+        $this->validation['slug'][] = 'unique:properties';
+        $request->validate($this->validation);
 
         $data = $request->all();
 
@@ -152,26 +157,8 @@ class PropertyController extends Controller
     public function update(Request $request, Property $property)
     {
         // validazione
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'slug' => [
-                'required',
-                'string',
-                'max:255',
-                Rule::unique('properties')->ignore($property)
-            ],
-            'description' => 'string',
-            'address' => 'required|string|max:255',
-            'city' => 'string|max:255',
-            'region' => 'string|max:255',
-            'country' => 'string|max:255',
-            'latitude' => 'required|string|max:255',
-            'longitude' => 'required|string|max:255',
-            'bedroom_count' => 'required|integer|max:20',
-            'bed_count' => 'required|integer|max:20',
-            'bathroom_count' => 'required|integer|max:20',
-            'services.*' => 'integer|exists:services,id'
-        ]);
+        $this->validation['slug'][] = Rule::unique('properties')->ignore($property);
+        $request->validate($this->validation);
 
         $data = $request->all();
 

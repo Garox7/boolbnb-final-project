@@ -9,14 +9,13 @@
         <div class="mb-3">
             <label for="name" class="form-label">Titolo</label>
             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
-            <input type="hidden" name="slug" value="{{ old('slug') }}">
             <div class="invalid-feedback">
                 @error('name')
-                    <ul>
-                        @foreach ($errors->get('name') as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+                <ul>
+                    @foreach ($errors->get('name') as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
                 @enderror
             </div>
         </div>
