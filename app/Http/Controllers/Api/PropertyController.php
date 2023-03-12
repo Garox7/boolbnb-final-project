@@ -41,14 +41,15 @@ class PropertyController extends Controller
 
     public function search(Request $request)
     {
-        $searchString = $request->input('address');
+        $searchString = $request->input('city');
 
-        $properties = Property::where('address', 'like', '%' . $searchString . '%')
+        $properties = Property::where('city', 'like', '%' . $searchString . '%')
             ->with([
                 'property_images' => function ($query) {
                     $query->select('id', 'property_id', 'image');
                 },
             ])
+            ->select('id', 'name', 'city', 'address', 'longitude', 'latitude')
             ->get();
             return response()->json([
                 'success' => true,

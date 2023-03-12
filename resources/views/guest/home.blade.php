@@ -6,6 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ config('app.name', 'Boolpress') }}</title>
 
+    {{-- style TomTom --}}
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps.css"
+    />
+
     {{-- JavaScript --}}
     <script src="{{ asset('js/front.js') }}" defer></script>
 </head>

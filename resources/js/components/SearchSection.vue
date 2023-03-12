@@ -1,46 +1,99 @@
 <template>
     <div>
-        <h1>Sto Cercando</h1>
-        <ul>
-            <li v-for="property in properties" :key="property.id">
-                {{ property.name }}
-            </li>
-        </ul>
-        <p>{{ properties.name }}</p>
+        <div v-if="loading">Caricamento...</div>
+
+        <div v-else class="search-container">
+
+            <div id="map" class="map" ref="map"> my map</div>
+
+            <div class="properties">
+
+                <!-- <h2>Proprietà a {{ city }}</h2> -->
+
+                <ul>
+                    <li v-for="property in properties" :key="property.id">
+                        {{ property.name }}
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+
     </div>
 </template>
 
 <script>
+import tt from "@tomtom-international/web-sdk-maps";
+
 export default {
     props: {
         searchAddress: String,
     },
     data() {
         return {
-            properties: null,
+            loading: false,
+            apiKey: 'pHHustjVtZP4zcljXIwtAYeEAtmslE3K',
+            properties: [],
+            map: null,
+            city: '',
+            markers: [],
         }
     },
-    watch: {
-        searchAddress(newVal, oldVal) {
-            if (newVal.length > 4) {
-                this.searchProperties();
-            }
-        }
+    mounted() {
+
     },
     methods: {
-        searchProperties() {
-            axios.post('/api/properties/search', {
-                address: this.searchAddress
+        initializeMap() {
+            this.map = tt.map({
+                key: this.apiKey,
+                container: 'map',
+                zoom: 12,
             })
-                .then(response => {
-                    this.properties = response.data.results;
-                    console.log(this.properties);
-                })
-                .catch(error => {
-                    console.log(error.response.data);
-                });
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+    // watch: {
+    //     searchAddress(newVal, oldVal) {
+    //         if (newVal.length > 2) {
+    //             this.searchProperties();
+    //         }
+    //     }
+    // },
+    // methods: {
+    //     searchProperties() {
+
+    //         axios.post('/api/properties/search', {
+    //             city: this.searchAddress
+    //         })
+    //             .then(response => {
+    //                 this.properties = response.data.results;
+    //                 console.log(this.properties);
+    //             })
+    //             .catch(error => {
+    //                 console.log(error);
+    //             });
+    //     },
+    //     getMap() {
+    //         this.map = tt.map({
+    //             key: this.apiKey,
+    //             container: 'map',
+    //         });
+    //     }
+    // },
+    // mounted() {
+    //     this.getMap();
+    // }
 }
 </script>
 

@@ -35,7 +35,7 @@
 
         <div class="property-details">
             <span>{{ address }}</span>
-            <span>{{ services }}</span>
+            <!-- <span>{{ services }}</span> -->
             <span>{{ bed }}</span>
             <span>{{ bathroom }}</span>
         </div>

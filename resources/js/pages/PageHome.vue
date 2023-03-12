@@ -13,6 +13,7 @@
     <div v-else>
         <SearchSection
             :searchAddress="searchAddress"
+            :searchMode="searchMode"
         />
     </div>
 </template>
@@ -39,7 +40,6 @@ export default {
         axios.get('api/properties')
             .then(response => {
                 this.arrProperties = response.data.results
-                console.log(this.arrProperties);
             });
     }
 }
@@ -53,6 +53,7 @@ export default {
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 1.5rem;
+    padding: 1.5rem;
 
     .card-container {
         flex: 1 1 auto;

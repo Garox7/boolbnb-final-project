@@ -4,12 +4,10 @@
             @searchProperty="getSearchString"
         />
 
-        <div class="main">
-            <router-view
-                :searchAddress="searchAddress"
-                :searchMode="searchMode"
-            />
-        </div>
+        <router-view
+            :searchAddress="searchAddress"
+            :searchMode="searchMode"
+        />
     </div>
 </template>
 
@@ -43,9 +41,4 @@ export default {
 <style lang="scss">
 // TODO: creare un file di reset
 @import './scss/reset';
-
-.main {
-    padding: 1.5rem;
-}
-
 </style>
