@@ -57,7 +57,9 @@ export default {
                 container: 'map',
                 zoom: 5,
                 center: this.positionDefault,
-            });
+            })
+            this.map.addControl(new tt.NavigationControl())
+            this.map.addControl(new tt.FullscreenControl());
 
             this.mapInizialized = true;
         },
@@ -80,12 +82,11 @@ export default {
                             this.markers.push(marker);
                             bounds.extend(marker.getLngLat());
                     });
-                    // this.markers.forEach((marker) => bounds.extend(marker.getLngLat()));
                     this.map.fitBounds(bounds, { padding: 50 });
+                })
+                .catch(error => {
+                    console.log(error);
                 });
-                // .catch(error => {
-                //     console.log(error);
-                // });
 
         },
     },

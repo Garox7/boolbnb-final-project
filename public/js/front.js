@@ -1963,6 +1963,8 @@ __webpack_require__.r(__webpack_exports__);
         zoom: 5,
         center: this.positionDefault
       });
+      this.map.addControl(new (_tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default().NavigationControl)());
+      this.map.addControl(new (_tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default().FullscreenControl)());
       this.mapInizialized = true;
     },
     getProperties: function getProperties() {
@@ -1981,17 +1983,14 @@ __webpack_require__.r(__webpack_exports__);
           _this.markers.push(marker);
           bounds.extend(marker.getLngLat());
         });
-        // this.markers.forEach((marker) => bounds.extend(marker.getLngLat()));
         _this.map.fitBounds(bounds, {
           padding: 50
         });
+      })["catch"](function (error) {
+        console.log(error);
       });
-      // .catch(error => {
-      //     console.log(error);
-      // });
     }
   },
-
   watch: {
     searchAddress: function searchAddress(newVal, oldVal) {
       if (newVal) {
